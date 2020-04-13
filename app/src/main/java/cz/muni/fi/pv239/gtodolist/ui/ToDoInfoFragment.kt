@@ -9,10 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import cz.muni.fi.pv239.gtodolist.R
 import cz.muni.fi.pv239.gtodolist.api.ToDoService
-import cz.muni.fi.pv239.gtodolist.model.ToDo
 import kotlinx.android.synthetic.main.fragment_todo_info.*
-import kotlinx.android.synthetic.main.fragment_todo_info.view.*
-import java.lang.NullPointerException
 
 /**
  * Fragment that contains information of specific TODO task.
@@ -41,7 +38,7 @@ class ToDoInfoFragment : Fragment() {
         }
 
         view.findViewById<Button>(R.id.button_export).setOnClickListener {
-            //todo
+            startActivity(CalendarExporter.createIntent(todo))
         }
 
         view.findViewById<Button>(R.id.button_back).setOnClickListener {
