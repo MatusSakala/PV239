@@ -27,12 +27,13 @@ class ToDoListFragment : Fragment(), RecyclerViewClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        todo_list.adapter = ToDoListAdapter(ToDoService().listAll(), this)
+        todo_list.adapter = ToDoListAdapter(ToDoService.listAllNotDone(), this)
         todo_list.layoutManager = LinearLayoutManager(this.context)
     }
 
     override fun recyclerViewListClicked(v: View?, position: Int) {
-        val bundle = bundleOf("position" to position.toString())
+        val id = (todo_list.adapter as ToDoListAdapter).todos[position].id
+        val bundle = bundleOf("id" to id)
         findNavController().navigate(R.id.action_to_todo_info, bundle)
     }
 }

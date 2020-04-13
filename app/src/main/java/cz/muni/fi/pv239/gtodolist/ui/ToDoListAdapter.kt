@@ -9,7 +9,7 @@ import cz.muni.fi.pv239.gtodolist.R
 import cz.muni.fi.pv239.gtodolist.model.ToDo
 
 
-class ToDoListAdapter(private val todos: List<ToDo>, private val listener: RecyclerViewClickListener): RecyclerView.Adapter<ToDoListAdapter.ViewHolder>() {
+class ToDoListAdapter(val todos: List<ToDo>, private val listener: RecyclerViewClickListener): RecyclerView.Adapter<ToDoListAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
