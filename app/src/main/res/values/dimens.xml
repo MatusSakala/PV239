@@ -1,3 +1,5 @@
 <resources>
     <dimen name="fab_margin">16dp</dimen>
+
+    <integer name="swipe_menu_item_dp_width">60</integer>
 </resources>
