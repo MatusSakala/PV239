@@ -4,10 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import cz.muni.fi.pv239.gtodolist.R
+import cz.muni.fi.pv239.gtodolist.api.CalendarExporter
 import cz.muni.fi.pv239.gtodolist.api.ToDoService
 import kotlinx.android.synthetic.main.fragment_todo_info.*
 
@@ -26,22 +26,22 @@ class ToDoInfoFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val id = arguments?.getInt("id")!!
+        val id = arguments?.getLong("id")!!
         val todo = ToDoService.get(id)
 
         title.text = todo.name
         description.text = todo.description
 
-        view.findViewById<Button>(R.id.button_finish).setOnClickListener {
+        button_done.setOnClickListener {
             ToDoService.markAsDone(todo.id)
             findNavController().navigate(R.id.action_to_todo_list)
         }
 
-        view.findViewById<Button>(R.id.button_export).setOnClickListener {
+        button_export.setOnClickListener {
             startActivity(CalendarExporter.createIntent(todo))
         }
 
-        view.findViewById<Button>(R.id.button_back).setOnClickListener {
+        button_back.setOnClickListener {
             findNavController().navigate(R.id.action_to_todo_list)
         }
     }

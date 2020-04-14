@@ -4,7 +4,13 @@
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#AEFF74</color>
 
+    <!-- list item -->
     <color name="todoListItemBackground">#D7C5F4</color>
     <color name="todoListItemText">#844ED3</color>
     <color name="todoListItemBorder">#DDCEF1</color>
+
+    <!-- icons background -->
+    <color name="exportEventIconBackground">#EC4B4B</color>
+    <color name="doneIconBackground">#CEFBBD</color>
+    <color name="backIconBackground">#91B0ED</color>
 </resources>

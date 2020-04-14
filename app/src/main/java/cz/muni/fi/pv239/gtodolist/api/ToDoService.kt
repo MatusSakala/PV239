@@ -31,11 +31,11 @@ object ToDoService {
         return mockToDoList.filter { toDo -> !toDo.done }
     }
 
-    fun get(id: Int): ToDo {
+    fun get(id: Long): ToDo {
         return mockToDoList.find { toDo -> toDo.id == id }!!
     }
 
-    fun markAsDone(id: Int){
+    fun markAsDone(id: Long){
         mockToDoList.forEach { toDo: ToDo -> if (toDo.id == id) { toDo.done = true} }
     }
 }

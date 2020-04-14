@@ -6,61 +6,64 @@
     android:layout_height="match_parent"
     tools:context=".ui.ToDoInfoFragment">
 
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
-
-    <TextView
-        android:id="@+id/title"
+    <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/border"
-        android:paddingTop="10dp"
-        android:paddingStart="20dp"
-        android:paddingBottom="10dp"
-        android:textSize="30dp"
-        android:textColor="@color/todoListItemText"
-        android:textStyle="bold"
-        android:textAppearance="?attr/textAppearanceListItem"
-        />
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/description"
-        android:layout_width="match_parent"
-        android:layout_height="222dp"
-        android:background="@drawable/border"
-        android:paddingTop="10dp"
-        android:paddingStart="20dp"
-        android:paddingBottom="10dp"
-        android:textColor="@color/todoListItemText"
-        android:textSize="25dp" />
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/border"
+            android:paddingStart="20dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:textAppearance="?attr/textAppearanceListItem"
+            android:textColor="@color/todoListItemText"
+            android:textSize="30dp"
+            android:textStyle="bold" />
 
-</LinearLayout>
+        <TextView
+            android:id="@+id/description"
+            android:layout_width="match_parent"
+            android:layout_height="222dp"
+            android:background="@drawable/border"
+            android:paddingStart="20dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:textColor="@color/todoListItemText"
+            android:textSize="25dp" />
 
-    <Button
-        android:id="@+id/button_finish"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/done"
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/button_done"
+        android:src="@drawable/done"
+        android:background="@color/doneIconBackground"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/button_export"/>
 
-    <Button
+    <ImageView
         android:id="@+id/button_export"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/export"
+        android:src="@drawable/export_event"
+        android:background="@color/exportEventIconBackground"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@id/button_finish"
+        app:layout_constraintStart_toEndOf="@id/button_done"
         app:layout_constraintEnd_toStartOf="@id/button_back"/>
 
-    <Button
+    <ImageView
         android:id="@+id/button_back"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/back"
+        android:src="@drawable/back"
+        android:background="@color/backIconBackground"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@id/button_export"
         app:layout_constraintEnd_toEndOf="parent"/>

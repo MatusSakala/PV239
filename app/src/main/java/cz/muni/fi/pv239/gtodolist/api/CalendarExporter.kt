@@ -1,4 +1,4 @@
-package cz.muni.fi.pv239.gtodolist.ui
+package cz.muni.fi.pv239.gtodolist.api
 
 import android.content.Intent
 import cz.muni.fi.pv239.gtodolist.model.ToDo
