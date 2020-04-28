@@ -7,13 +7,13 @@
         android:id="@+id/todo_item"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/border"
         android:paddingTop="10dp"
         android:paddingStart="20dp"
         android:paddingBottom="10dp"
         android:textSize="25dp"
-        android:textColor="@color/todoListItemText"
+        android:textColor="@color/white"
         android:textStyle="bold"
+        android:background="@color/white"
         android:textAppearance="?attr/textAppearanceListItem"
         />
 
