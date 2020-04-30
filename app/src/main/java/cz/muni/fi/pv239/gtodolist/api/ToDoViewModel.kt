@@ -43,6 +43,17 @@ class ToDoViewModel(application : Application) : AndroidViewModel(application){
         return res.toList()
     }
 
+    fun getTodosOfCategory(cat: String): List<ToDo>{
+        val res = ArrayList<ToDo>()
+        for(todo in allNotDone.value!!){
+            if(todo.category == cat || cat == "ALL"){
+                res.add(todo)
+            }
+        }
+        return res.toList()
+    }
+
+
     fun getTodoWithId(id: Long): ToDo{
         for(todo in allTodos.value!!){
             if(todo.id == id){

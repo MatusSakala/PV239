@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/backgroundPrimaryDark"
     tools:context=".ui.ToDoInfoFragment">
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -17,7 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Name"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textStyle="bold"
             android:layout_marginTop="8dp"/>
 
@@ -30,6 +31,7 @@
             android:inputType="textAutoComplete"
             android:background="@drawable/todo_description_bg"
             android:layout_margin="15dp"
+            android:textColor="@color/white"
             android:textSize="20sp" />
 
         <TextView
@@ -38,7 +40,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Description"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textStyle="bold"
             android:layout_marginTop="8dp"/>
 
@@ -52,6 +54,7 @@
             android:minLines="3"
             android:layout_marginTop="5dp"
             android:layout_marginHorizontal="15dp"
+            android:textColor="@color/white"
             android:background="@drawable/todo_description_bg"
             android:inputType="textMultiLine" />
 
@@ -61,7 +64,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Category"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textStyle="bold"
             android:layout_marginTop="8dp"/>
 
@@ -81,6 +84,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="2dp"
+                android:textColor="@color/white"
                 android:text="None"/>
             <CheckBox
                 android:id="@+id/category_personal"
@@ -88,6 +92,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="2dp"
+                android:textColor="@color/white"
                 android:text="Personal"/>
             <CheckBox
                 android:id="@+id/category_work"
@@ -95,6 +100,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="2dp"
+                android:textColor="@color/white"
                 android:text="Work"/>
             <CheckBox
                 android:id="@+id/category_travel"
@@ -102,6 +108,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="2dp"
+                android:textColor="@color/white"
                 android:text="Travel"/>
             <CheckBox
                 android:id="@+id/category_other"
@@ -109,6 +116,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="2dp"
+                android:textColor="@color/white"
                 android:text="Other"/>
         </LinearLayout>
 
@@ -118,7 +126,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Importance"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textStyle="bold"
             android:layout_marginTop="8dp"/>
 
@@ -142,7 +150,7 @@
             android:background="@color/colorPrimary"
             android:text="UPDATE"
             android:layout_margin="10dp"
-            android:textColor="@android:color/background_dark" />
+            android:textColor="@color/white" />
 
 
     </LinearLayout>

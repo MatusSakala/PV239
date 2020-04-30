@@ -22,12 +22,13 @@
     <color name="white">#ffffff</color>
 
     <!-- category colors -->
-    <color name="categoryNone">#fcf523</color>
-    <color name="categoryPersonal">#098bb3</color>
-    <color name="categoryWork">#f01818</color>
-    <color name="categoryTravel">#00a103</color>
-    <color name="categoryOther">#ad0984</color>
+    <color name="categoryNone">#e3e305</color>
+    <color name="categoryPersonal">#2323eb</color>
+    <color name="categoryWork">#b80000</color>
+    <color name="categoryTravel">#008f0a</color>
+    <color name="categoryOther">#99008c</color>
+    <color name="categoryAll">#FFFFFF</color>
 
     <!-- app theme colors -->
-    <color name="primaryBackgroundDark">#120c0b</color>
+    <color name="backgroundPrimaryDark">#262120</color>
 </resources>

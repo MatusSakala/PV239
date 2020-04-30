@@ -20,6 +20,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.NewToDoActivity" />
+        <activity android:name=".ui.DisplayCategoryActivity" />
     </application>
 
 </manifest>
