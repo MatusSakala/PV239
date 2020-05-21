@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/scrollView"
+    android:layout_marginTop="20dp"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true">
@@ -11,142 +12,11 @@
     android:orientation="vertical"
     android:background="@color/backgroundPrimaryDark"
     tools:context=".ui.ToDoListFragment">
-    <LinearLayout
+    <com.baoyz.swipemenulistview.SwipeMenuListView
+        android:id="@+id/listView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:gravity="center"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp">
-        <Button
-            android:id="@+id/list_category_headline"
-            android:layout_width="180dp"
-            android:layout_height="80dp"
-            android:background="@drawable/status_button"
-            android:drawableLeft="@drawable/category_all"
-            android:drawablePadding="15dp"
-            android:paddingLeft="20dp"
-            android:paddingRight="40dp"
-            android:text="ASDASD"
-            android:textColor="@color/categoryTravel"
-            android:textSize="15sp"
-            />
+        android:layout_marginTop="5dp"/>
 
     </LinearLayout>
-
-    <TextView
-        android:id="@+id/stars_ten"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_gravity="left"
-        android:background="@drawable/stars_ten"
-        android:textColor="@color/red"/>
-
-    <com.baoyz.swipemenulistview.SwipeMenuListView
-        android:id="@+id/listView10"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"/>
-    <TextView
-        android:id="@+id/stars_nine"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_gravity="left"
-        android:background="@drawable/stars_nine"/>
-
-    <com.baoyz.swipemenulistview.SwipeMenuListView
-        android:id="@+id/listView9"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"/>
-    <TextView
-        android:id="@+id/stars_eight"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_gravity="left"
-        android:background="@drawable/stars_eight"/>
-    <com.baoyz.swipemenulistview.SwipeMenuListView
-        android:id="@+id/listView8"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"/>
-    <TextView
-        android:id="@+id/stars_seven"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_gravity="left"
-        android:background="@drawable/stars_seven"/>
-    <com.baoyz.swipemenulistview.SwipeMenuListView
-        android:id="@+id/listView7"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"/>
-    <TextView
-        android:id="@+id/stars_six"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_gravity="left"
-        android:background="@drawable/stars_six"/>
-    <com.baoyz.swipemenulistview.SwipeMenuListView
-        android:id="@+id/listView6"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"/>
-    <TextView
-        android:id="@+id/stars_five"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_gravity="left"
-        android:background="@drawable/stars_five"/>
-    <com.baoyz.swipemenulistview.SwipeMenuListView
-        android:id="@+id/listView5"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"/>
-    <TextView
-        android:id="@+id/stars_four"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_gravity="left"
-        android:background="@drawable/stars_four"/>
-    <com.baoyz.swipemenulistview.SwipeMenuListView
-        android:id="@+id/listView4"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"/>
-    <TextView
-        android:id="@+id/stars_three"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_gravity="left"
-        android:background="@drawable/stars_three"/>
-    <com.baoyz.swipemenulistview.SwipeMenuListView
-        android:id="@+id/listView3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"/>
-    <TextView
-        android:id="@+id/stars_two"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_gravity="left"
-        android:background="@drawable/stars_two"/>
-    <com.baoyz.swipemenulistview.SwipeMenuListView
-        android:id="@+id/listView2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"/>
-    <TextView
-        android:id="@+id/stars_one"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_gravity="left"
-        android:background="@drawable/stars_one"/>
-    <com.baoyz.swipemenulistview.SwipeMenuListView
-        android:id="@+id/listView1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"/>
-
-</LinearLayout>
 </ScrollView>

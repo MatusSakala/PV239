@@ -4,17 +4,20 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
 import androidx.sqlite.db.SupportSQLiteDatabase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 @Database(
-    entities = [ToDo::class],
-    version = 2
+    entities = [ToDo::class, Category::class],
+    version = 8
 )
+@TypeConverters(Converters::class)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun todoDao(): ToDoDao
+    abstract fun categoryDao(): CategoryDao
 
     companion object{
         @Volatile private var instance: AppDatabase? = null

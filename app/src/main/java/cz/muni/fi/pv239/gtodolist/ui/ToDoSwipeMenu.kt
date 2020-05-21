@@ -13,13 +13,13 @@ class ToDoSwipeMenu: SwipeMenuCreator{
 
     override fun create(menu: SwipeMenu?) {
         val calendarItem = SwipeMenuItem(menu?.context!!)
-        calendarItem.background = ColorDrawable(ContextCompat.getColor(menu.context, R.color.exportEventIconBackground))
+        //calendarItem.background = ColorDrawable(ContextCompat.getColor(menu.context, R.color.exportEventIconBackground))
         calendarItem.width = calculateWidth(menu.context)
         calendarItem.setIcon(R.drawable.export_event)
         menu.addMenuItem(calendarItem)
 
         val doneItem = SwipeMenuItem(menu.context)
-        doneItem.background = ColorDrawable(ContextCompat.getColor(menu.context, R.color.doneIconBackground))
+        //doneItem.background = ColorDrawable(ContextCompat.getColor(menu.context, R.color.doneIconBackground))
         doneItem.width = calculateWidth(menu.context)
         doneItem.setIcon(R.drawable.done)
         menu.addMenuItem(doneItem)

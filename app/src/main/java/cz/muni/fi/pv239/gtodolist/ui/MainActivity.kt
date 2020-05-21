@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import cz.muni.fi.pv239.gtodolist.R
+import cz.muni.fi.pv239.gtodolist.api.CategoryViewModel
 import cz.muni.fi.pv239.gtodolist.api.ToDoViewModel
 import cz.muni.fi.pv239.gtodolist.model.ToDo
 import kotlinx.android.synthetic.main.activity_main.*
@@ -29,6 +30,7 @@ class MainActivity : AppCompatActivity() {
 
     private val TAG = MainActivity::class.java.simpleName
     private lateinit var todoViewModel: ToDoViewModel
+    private lateinit var categoryViewModel: CategoryViewModel
     private val newToDoActivityRequestCode = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,55 +47,70 @@ class MainActivity : AppCompatActivity() {
         // create view model so even when activity is destroyed model persists,
         // and when activity is recreated same model will be returned
         todoViewModel = ViewModelProvider(this).get(ToDoViewModel::class.java)
+        categoryViewModel = ViewModelProvider(this).get(CategoryViewModel::class.java)
 
+//        personal_todos_button.background.setTint(resources.getColor(R.color.categoryPersonal))
+//        work_todos_button.background.setTint(resources.getColor(R.color.categoryWork))
+//        travel_todos_button.background.setTint(resources.getColor(R.color.categoryTravel))
+//        none_todos_button.background.setTint(resources.getColor(R.color.categoryNone))
+//        other_todos_button.background.setTint(resources.getColor(R.color.categoryOther))
+//        all_todos_button.background.setTint(resources.getColor(R.color.categoryAll))
+//        personal_todos_button.setOnClickListener{
+//            val intent = Intent(this, DisplayCategoryActivity::class.java)
+//            intent.putExtra("category", "PERSONAL")
+//            startActivity(intent)
+//        }
+//
+//        work_todos_button.setOnClickListener{
+//            val intent = Intent(this, DisplayCategoryActivity::class.java)
+//            intent.putExtra("category", "WORK")
+//            startActivity(intent)
+//        }
+//
+//        travel_todos_button.setOnClickListener{
+//            val intent = Intent(this, DisplayCategoryActivity::class.java)
+//            intent.putExtra("category", "TRAVEL")
+//            startActivity(intent)
+//        }
+//
+//        none_todos_button.setOnClickListener{
+//            val intent = Intent(this, DisplayCategoryActivity::class.java)
+//            intent.putExtra("category", "None")
+//            startActivity(intent)
+//        }
+//
+//        other_todos_button.setOnClickListener{
+//            val intent = Intent(this, DisplayCategoryActivity::class.java)
+//            intent.putExtra("category", "OTHER")
+//            startActivity(intent)
+//        }
+//
+//        all_todos_button.setOnClickListener{
+//            val intent = Intent(this, DisplayCategoryActivity::class.java)
+//            intent.putExtra("category", "ALL")
+//            startActivity(intent)
+//        }
 
-        personal_todos_button.background.setTint(resources.getColor(R.color.categoryPersonal))
-        work_todos_button.background.setTint(resources.getColor(R.color.categoryWork))
-        travel_todos_button.background.setTint(resources.getColor(R.color.categoryTravel))
-        none_todos_button.background.setTint(resources.getColor(R.color.categoryNone))
-        other_todos_button.background.setTint(resources.getColor(R.color.categoryOther))
-
-        personal_todos_button.setOnClickListener{
-            val intent = Intent(this, DisplayCategoryActivity::class.java)
-            intent.putExtra("category", "PERSONAL")
-            startActivity(intent)
-        }
-
-        work_todos_button.setOnClickListener{
-            val intent = Intent(this, DisplayCategoryActivity::class.java)
-            intent.putExtra("category", "WORK")
-            startActivity(intent)
-        }
-
-        travel_todos_button.setOnClickListener{
-            val intent = Intent(this, DisplayCategoryActivity::class.java)
-            intent.putExtra("category", "TRAVEL")
-            startActivity(intent)
-        }
-
-        none_todos_button.setOnClickListener{
-            val intent = Intent(this, DisplayCategoryActivity::class.java)
-            intent.putExtra("category", "NONE")
-            startActivity(intent)
-        }
-
-        other_todos_button.setOnClickListener{
-            val intent = Intent(this, DisplayCategoryActivity::class.java)
-            intent.putExtra("category", "OTHER")
-            startActivity(intent)
-        }
-
-        all_todos_button.setOnClickListener{
-            val intent = Intent(this, DisplayCategoryActivity::class.java)
-            intent.putExtra("category", "ALL")
-            startActivity(intent)
-        }
+//        val adapter = ToDoListAdapter(this)
+//        todoViewModel.allNotDone.observe(this, Observer {todos ->
+//            var sortedByImp = sortTodosByImportance(todos, true)
+//            Log.d(TAG, "SORTED TODOS = " + sortedByImp.toString())
+//            adapter.setTodos(sortedByImp)
+//        })
 
         add_todo_fab.setOnClickListener{
             Log.d(TAG, "ADD TODO FAB CLICKED")
             val intent = Intent(this, NewToDoActivity::class.java)
             startActivityForResult(intent, newToDoActivityRequestCode)
         }
+
+        search_bar.setOnClickListener{
+            search_bar.isIconified = false
+        }
+
+        categoryViewModel.userCategories.observe(this, Observer {categories ->
+
+        })
 
     }
 
@@ -123,9 +140,16 @@ class MainActivity : AppCompatActivity() {
             intentData?.let {data ->
                 val newName = data.getStringExtra("name")
                 val newDescription = data.getStringExtra("description")
-                val newCategory = data.getStringExtra("category")
+                val categoryName = data.getStringExtra("category")
                 val newImportance = data.getIntExtra("importance", 0)
-                todoViewModel.insert(ToDo(newName, newDescription, false, newCategory, newImportance.toLong()))
+                categoryViewModel.userCategories.observe(this, Observer {categories ->
+                    val newCategory = categoryViewModel.findByName(categoryName)
+                    if(newCategory.name != ""){
+                        todoViewModel.insert(ToDo(newName, newDescription, false, newCategory, newImportance.toLong()))
+                        categoryViewModel.userCategories.removeObservers(this)
+                    }
+                })
+
             }
 
         } else {

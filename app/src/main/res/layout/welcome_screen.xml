@@ -4,118 +4,26 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginTop="60dp"
+    android:layout_marginTop="20dp"
     android:background="@color/backgroundPrimaryDark"
     app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal">
+        android:orientation="vertical">
 
-    <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_weight="1">
-        <Button
-            android:id="@+id/personal_todos_button"
-            android:layout_width="180dp"
-            android:layout_height="80dp"
-            android:layout_gravity="center"
-            android:background="@drawable/status_button"
-            android:drawableStart="@drawable/category_personal"
-            android:drawablePadding="15dp"
-            android:paddingLeft="20dp"
-            android:paddingRight="40dp"
-            android:layout_marginTop="30dp"
-            android:text="Personal"
-            android:textColor="@color/categoryPersonal"
-            android:textSize="15sp"
-            />
-
-        <Button
-            android:id="@+id/work_todos_button"
-            android:layout_width="180dp"
-            android:layout_height="80dp"
-            android:layout_gravity="center"
-            android:background="@drawable/status_button"
-            android:drawableStart="@drawable/category_work"
-            android:drawablePadding="15dp"
-            android:paddingLeft="20dp"
-            android:paddingRight="40dp"
-            android:layout_marginTop="50dp"
-            android:text="Work"
-            android:textColor="@color/categoryWork"
-            android:textSize="15sp"
-            />
-        <Button
-            android:id="@+id/none_todos_button"
-            android:layout_width="180dp"
-            android:layout_height="80dp"
-            android:layout_gravity="center"
-            android:background="@drawable/status_button"
-            android:drawableStart="@drawable/category_none"
-            android:drawablePadding="15dp"
-            android:paddingLeft="20dp"
-            android:paddingRight="40dp"
-            android:layout_marginTop="50dp"
-            android:text="None"
-            android:textColor="@color/categoryNone"
-            android:textSize="15sp"
-            />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_weight="1">
-        <Button
-            android:id="@+id/travel_todos_button"
-            android:layout_width="180dp"
-            android:layout_height="80dp"
-            android:layout_gravity="center"
-            android:background="@drawable/status_button"
-            android:drawableStart="@drawable/category_travel"
-            android:drawablePadding="15dp"
-            android:paddingLeft="20dp"
-            android:paddingRight="40dp"
-            android:layout_marginTop="30dp"
-            android:text="Travel"
-            android:textColor="@color/categoryTravel"
-            android:textSize="15sp"
-            />
-        <Button
-            android:id="@+id/other_todos_button"
-            android:layout_width="180dp"
-            android:layout_height="80dp"
-            android:layout_gravity="center"
-            android:background="@drawable/status_button"
-            android:drawableStart="@drawable/category_other"
-            android:drawablePadding="15dp"
-            android:paddingLeft="20dp"
-            android:paddingRight="40dp"
-            android:layout_marginTop="50dp"
-            android:text="Other"
-            android:textColor="@color/categoryOther"
-            android:textSize="15sp"
-            />
-        <Button
-            android:id="@+id/all_todos_button"
-            android:layout_width="180dp"
-            android:layout_height="80dp"
-            android:layout_gravity="center"
-            android:background="@drawable/status_button"
-            android:drawableStart="@drawable/category_all"
-            android:drawablePadding="15dp"
-            android:paddingLeft="20dp"
-            android:paddingRight="40dp"
-            android:layout_marginTop="50dp"
-            android:text="All"
-            android:textColor="@color/categoryAll"
-            android:textSize="15sp"
-            />
-    </LinearLayout>
+        <SearchView
+            android:id="@+id/search_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:background="@color/grey"
+            android:queryHint="Search todos..."
+            android:clickable="true"
+            android:iconifiedByDefault="false"/>
+        <include layout="@layout/content_main"/>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

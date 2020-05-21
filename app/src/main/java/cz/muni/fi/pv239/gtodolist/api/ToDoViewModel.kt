@@ -31,22 +31,11 @@ class ToDoViewModel(application : Application) : AndroidViewModel(application){
         Log.d(TAG, "GOT TODOS FROM DATABASE")
     }
 
-    fun getSortedByCategory(): List<ToDo>{
-        var res = ArrayList<ToDo>()
-        for(cat in Category.values()){
-            for(todo in allNotDone.value!!){
-                if(todo.category == cat.toString()){
-                    res.add(todo)
-                }
-            }
-        }
-        return res.toList()
-    }
 
     fun getTodosOfCategory(cat: String): List<ToDo>{
         val res = ArrayList<ToDo>()
         for(todo in allNotDone.value!!){
-            if(todo.category == cat || cat == "ALL"){
+            if(todo.category.name == cat || cat == "all"){
                 res.add(todo)
             }
         }

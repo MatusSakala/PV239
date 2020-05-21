@@ -41,7 +41,7 @@
     <ImageView
         android:id="@+id/button_done"
         android:src="@drawable/done"
-        android:background="@color/doneIconBackground"
+        android:background="@color/backgroundPrimaryDark"
         android:layout_width="0dp"
         android:layout_height="60dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -51,7 +51,7 @@
     <ImageView
         android:id="@+id/button_export"
         android:src="@drawable/export_event"
-        android:background="@color/exportEventIconBackground"
+        android:background="@color/backgroundPrimaryDark"
         android:layout_width="0dp"
         android:layout_height="60dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -61,7 +61,7 @@
     <ImageView
         android:id="@+id/button_back"
         android:src="@drawable/back"
-        android:background="@color/backIconBackground"
+        android:background="@color/backgroundPrimaryDark"
         android:layout_width="0dp"
         android:layout_height="60dp"
         app:layout_constraintBottom_toBottomOf="parent"
