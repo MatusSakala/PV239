@@ -21,9 +21,6 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <!--
-    <include layout="@layout/content_main" />
-    <-->
     <include layout="@layout/welcome_screen"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -33,6 +30,7 @@
         android:layout_gravity="bottom|end"
         android:layout_marginRight="25dp"
         android:layout_marginBottom="70dp"
+        android:visibility="gone"
         app:fabSize="normal"
         app:srcCompat="@drawable/add_todo_fab"
         app:backgroundTint="@color/colorPrimaryDark"/>

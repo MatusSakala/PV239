@@ -11,13 +11,16 @@ data class ToDo (
     @ColumnInfo(name = "description") var description: String,
     @ColumnInfo(name = "done") var done: Boolean,
     @ColumnInfo(name = "category") var category: Category,
-    @ColumnInfo(name = "importance") var importance: Long) {
+    @ColumnInfo(name = "importance") var importance: Long,
+    @ColumnInfo(name = "added") var dateAdded: String)
+{
 
-    constructor(name: String, description: String) : this(0, name, description, false, Category("", ""), 0)
-    constructor(id: Long, name: String, description: String) : this(id, name, description, false, Category("", ""), 0)
-    constructor(name: String, description: String, done: Boolean) : this(0, name, description, done, Category("", ""), 0)
-    constructor(name: String, description: String, done: Boolean, category: Category): this(0, name, description, done, category, 0)
-    constructor(name: String, description: String, done: Boolean, category: Category, importance: Long): this(0, name, description, done, category, importance)
+    constructor(name: String, description: String) : this(0, name, description, false, Category("", ""), 0, "")
+    constructor(id: Long, name: String, description: String) : this(id, name, description, false, Category("", ""), 0, "")
+    constructor(name: String, description: String, done: Boolean) : this(0, name, description, done, Category("", ""), 0, "")
+    constructor(name: String, description: String, done: Boolean, category: Category): this(0, name, description, done, category, 0, "")
+    constructor(name: String, description: String, done: Boolean, category: Category, importance: Long): this(0, name, description, done, category, importance, "")
+    constructor(name: String, description: String, done: Boolean, category: Category, importance: Long, added: String): this(0, name, description, done, category, importance, added)
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (javaClass != other?.javaClass) return false

@@ -24,6 +24,17 @@
             android:queryHint="Search todos..."
             android:clickable="true"
             android:iconifiedByDefault="false"/>
+        <TextView
+            android:id="@+id/empty_list_message"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="50dp"
+            android:layout_marginTop="20dp"
+            android:textColor="@color/white"
+            android:visibility="gone"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:text="Start by adding todos."/>
         <include layout="@layout/content_main"/>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

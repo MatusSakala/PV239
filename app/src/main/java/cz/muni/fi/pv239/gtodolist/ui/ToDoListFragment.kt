@@ -21,6 +21,7 @@ import cz.muni.fi.pv239.gtodolist.api.CalendarExporter
     import cz.muni.fi.pv239.gtodolist.api.ToDoService
 import cz.muni.fi.pv239.gtodolist.api.ToDoViewModel
 import cz.muni.fi.pv239.gtodolist.model.ToDo
+import kotlinx.android.synthetic.main.activity_main.view.*
 import kotlinx.android.synthetic.main.fragment_todo_list.*
 import kotlinx.android.synthetic.main.welcome_screen.*
 import kotlinx.android.synthetic.main.welcome_screen.view.*
@@ -104,6 +105,15 @@ class ToDoListFragment : Fragment(), SwipeMenuListView.OnMenuItemClickListener, 
             var sortedByImp = sortTodosByImportance(validTodos, true)
             Log.d(TAG, "SORTED TODOS = " + sortedByImp.toString())
             adapter.setTodos(sortedByImp)
+            if(sortedByImp.size == 0){
+                view.rootView.empty_list_message.visibility = View.VISIBLE
+                view.rootView.search_bar.visibility = View.GONE
+                view.rootView.add_todo_fab.show()
+            }else{
+                view.rootView.empty_list_message.visibility = View.GONE
+                view.rootView.search_bar.visibility = View.VISIBLE
+                view.rootView.add_todo_fab.show()
+            }
             todosLoaded = true
         })
 
@@ -151,8 +161,6 @@ class ToDoListFragment : Fragment(), SwipeMenuListView.OnMenuItemClickListener, 
             1 -> {
                 todo.done = true
                 todoViewModel.update(todo)
-                //ToDoService.markAsDone(todo.id)
-                //listView.adapter = ToDoListAdapter(ToDoService.listAllNotDone())
             }
         }
         return false

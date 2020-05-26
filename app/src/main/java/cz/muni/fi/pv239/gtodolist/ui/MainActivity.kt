@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.Display
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.FrameLayout
 import android.widget.PopupMenu
@@ -24,6 +25,10 @@ import cz.muni.fi.pv239.gtodolist.model.ToDo
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_todo_list.*
 import kotlinx.android.synthetic.main.welcome_screen.*
+import java.text.SimpleDateFormat
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
+import java.util.*
 import java.util.logging.Logger
 
 class MainActivity : AppCompatActivity() {
@@ -38,16 +43,11 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
 
-
-//        add_todo_fab.setOnClickListener { view ->
-//            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                    .setAction("Action", null).show()
-//        }
-
-        // create view model so even when activity is destroyed model persists,
-        // and when activity is recreated same model will be returned
         todoViewModel = ViewModelProvider(this).get(ToDoViewModel::class.java)
         categoryViewModel = ViewModelProvider(this).get(CategoryViewModel::class.java)
+
+//        search_bar.visibility = View.GONE
+          add_todo_fab.show()
 
 //        personal_todos_button.background.setTint(resources.getColor(R.color.categoryPersonal))
 //        work_todos_button.background.setTint(resources.getColor(R.color.categoryWork))
@@ -98,6 +98,7 @@ class MainActivity : AppCompatActivity() {
 //            adapter.setTodos(sortedByImp)
 //        })
 
+
         add_todo_fab.setOnClickListener{
             Log.d(TAG, "ADD TODO FAB CLICKED")
             val intent = Intent(this, NewToDoActivity::class.java)
@@ -114,6 +115,24 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+
+    override fun onResume() {
+        search_bar.visibility = View.VISIBLE
+        add_todo_fab.show()
+        super.onResume()
+    }
+
+    override fun onStart() {
+        search_bar.visibility = View.VISIBLE
+        add_todo_fab.show()
+        super.onStart()
+    }
+
+    override fun onBackPressed() {
+        search_bar.visibility = View.VISIBLE
+        add_todo_fab.show()
+        super.onBackPressed()
+    }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -136,6 +155,9 @@ class MainActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, intentData: Intent?) {
         super.onActivityResult(requestCode, resultCode, intentData)
 
+        search_bar.visibility = View.VISIBLE
+        add_todo_fab.show()
+
         if (requestCode == newToDoActivityRequestCode && resultCode == Activity.RESULT_OK) {
             intentData?.let {data ->
                 val newName = data.getStringExtra("name")
@@ -145,7 +167,12 @@ class MainActivity : AppCompatActivity() {
                 categoryViewModel.userCategories.observe(this, Observer {categories ->
                     val newCategory = categoryViewModel.findByName(categoryName)
                     if(newCategory.name != ""){
-                        todoViewModel.insert(ToDo(newName, newDescription, false, newCategory, newImportance.toLong()))
+                        var calendar = Calendar.getInstance()
+                        var day = calendar.get(Calendar.DAY_OF_MONTH)
+                        var month = calendar.get(Calendar.MONTH)
+                        var year = calendar.get(Calendar.YEAR)
+                        var date = day.toString() + "/" + month.toString() + "/" + year.toString()
+                        todoViewModel.insert(ToDo(newName, newDescription, false, newCategory, newImportance.toLong(), date))
                         categoryViewModel.userCategories.removeObservers(this)
                     }
                 })

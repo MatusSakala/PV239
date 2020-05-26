@@ -32,16 +32,6 @@ class ToDoListAdapter(val context: Context) : BaseAdapter(){
                     R.drawable.stars_four, R.drawable.stars_five, R.drawable.stars_six, R.drawable.stars_seven,
                     R.drawable.stars_eight, R.drawable.stars_nine, R.drawable.stars_ten)
 
-    fun getColorFromCategory(category: String): Int{
-        when(category){
-//            Category.PERSONAL.toString() -> return context.resources.getColor(R.color.categoryPersonal)
-//            Category.WORK.toString() -> return context.resources.getColor(R.color.categoryWork)
-//            Category.OTHER.toString() -> return context.resources.getColor(R.color.categoryOther)
-//            Category.TRAVEL.toString() -> return context.resources.getColor(R.color.categoryTravel)
-//            Category.NONE.toString() -> return context.resources.getColor(R.color.categoryNone)
-        }
-        return 0
-    }
 
     override fun getItem(position: Int): Any {
         return todos[position]
@@ -68,15 +58,13 @@ class ToDoListAdapter(val context: Context) : BaseAdapter(){
             view = convertView
             viewHolder = view.tag as ViewHolder
         }
-        //var color = getColorFromCategory(todo.category)
 
         viewHolder.name.text = todo.name
         // this is for textView with background
         //viewHolder.categoryDot.background.setTint(context.resources.getColor(R.color.categoryTravel))
         // this is for imageView
         //viewHolder.categoryDot.setColorFilter(color)
-        // date will be added in next version
-        viewHolder.dateAdded.text = "28/12/20"
+        viewHolder.dateAdded.text = todo.dateAdded
         viewHolder.categoryName.text = todo.category.name
         viewHolder.importance.setImageDrawable(context.resources.getDrawable(importanceImages[todo.importance.toInt() - 1]))
         viewHolder.importance.setColorFilter(Color.parseColor(todo.category.color))

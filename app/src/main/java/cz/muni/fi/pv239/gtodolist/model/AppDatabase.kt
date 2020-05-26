@@ -12,7 +12,7 @@ import kotlinx.coroutines.launch
 
 @Database(
     entities = [ToDo::class, Category::class],
-    version = 8
+    version = 9
 )
 @TypeConverters(Converters::class)
 abstract class AppDatabase : RoomDatabase() {
