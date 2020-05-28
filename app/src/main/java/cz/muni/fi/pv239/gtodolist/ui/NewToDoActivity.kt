@@ -115,7 +115,7 @@ class NewToDoActivity : AppCompatActivity() {
                     // add category
                     var categoryName = dialog.findViewById<EditText>(R.id.category_name)!!.text.toString()
                     var rnd = Random()
-                    var color = Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256)).toString(16).replace('-', '#')
+                    var color = Color.HSVToColor(floatArrayOf(rnd.nextInt(361).toFloat(), 0.6f, 0.8f)).toString(16).replace('-', '#')
                     categoryViewModel.insert(Category(categoryName, color))
                     Toast.makeText(
                         applicationContext,

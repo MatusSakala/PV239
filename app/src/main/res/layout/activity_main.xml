@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/backgroundPrimaryDark"
+    android:background="@color/backgroundPrimary"
     tools:context=".ui.MainActivity">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -33,7 +33,7 @@
         android:visibility="gone"
         app:fabSize="normal"
         app:srcCompat="@drawable/add_todo_fab"
-        app:backgroundTint="@color/colorPrimaryDark"/>
+        app:backgroundTint="@color/buttonBackgroundPrimary"/>
 
 
 

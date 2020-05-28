@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/backgroundPrimaryDark"
+    android:background="@color/backgroundPrimary"
     android:foreground="?android:attr/selectableItemBackground">
 
     <LinearLayout
@@ -23,7 +23,7 @@
                 android:id="@+id/todo_date_added"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/grey"
+                android:textColor="@color/textSecondary"
                 android:paddingStart="20dp"
                 android:text="24/04/2020"
                 />
@@ -42,7 +42,7 @@
                     android:layout_marginBottom="15dp"
                     android:textSize="25dp"
                     android:gravity="left"
-                    android:textColor="@color/white"
+                    android:textColor="@color/textPrimary"
                     android:singleLine="true"
                     android:textStyle="bold"
                     android:text="THIS IS Rfas"
@@ -60,7 +60,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="20"
-                    android:textColor="@color/white"
+                    android:textColor="@color/textPrimary"
                     android:text="Work"
                     android:textSize="10dp"
                     android:layout_marginEnd="5dp"

@@ -1,36 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#6200EE</color>
-    <color name="colorPrimaryDark">#3700B3</color>
-    <color name="colorAccent">#AEFF74</color>
-
-    <!-- list item -->
-    <color name="todoListItemBackground">#D7C5F4</color>
-    <color name="todoListItemText">#844ED3</color>
-    <color name="todoListItemBorder">#DDCEF1</color>
-
-    <!-- icons background -->
-    <color name="exportEventIconBackground">#EC4B4B</color>
-    <color name="doneIconBackground">#CEFBBD</color>
-    <color name="backIconBackground">#91B0ED</color>
-
-    <!-- general colors -->
-    <color name="test">#AA000000</color>
-    <color name="black">#000000</color>
-    <color name="red">#ff0000</color>
-    <color name="green">#00ff00</color>
-    <color name="blue">#0000ff</color>
-    <color name="white">#ffffff</color>
-    <color name="grey">#545454</color>
-    <!-- category colors -->
-    <color name="categoryNone">#e3e305</color>
-    <color name="categoryPersonal">#2323eb</color>
-    <color name="categoryWork">#b80000</color>
-    <color name="categoryTravel">#008f0a</color>
-    <color name="categoryOther">#99008c</color>
-    <color name="categoryAll">#FFFFFF</color>
 
     <!-- app theme colors -->
-    <color name="backgroundPrimaryDark">#262120</color>
-    <color name="buttonBackgroundPrimaryDark">#1A1A1A</color>
+    <color name="appPrimary">#32327D</color>
+
+    <color name="backgroundPrimary">#262120</color>
+
+    <color name="buttonBackgroundPrimary">#3D3D99</color>
+    <color name="buttonBackgroundSecondary">#1A1A1A</color>
+    <color name="buttonBackgroundSecondaryDarker">#0C0C0C</color>
+
+    <color name="textPrimary">#E6E6E6</color>
+    <color name="textSecondary">#999999</color>
+
+    <color name="seekBar">#FF3333</color>
+
+    <!-- category colors -->
+    <color name="categoryNone">#BEBECC</color>
+    <color name="categoryPersonal">#CC5252</color>
+    <color name="categoryWork">#52CC52</color>
+    <color name="categoryTravel">#5252CC</color>
+
 </resources>
