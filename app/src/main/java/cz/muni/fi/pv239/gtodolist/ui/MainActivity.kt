@@ -1,6 +1,7 @@
 package cz.muni.fi.pv239.gtodolist.ui
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -8,10 +9,8 @@ import android.view.Display
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.widget.ArrayAdapter
-import android.widget.FrameLayout
-import android.widget.PopupMenu
-import android.widget.Toast
+import android.widget.*
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -98,6 +97,12 @@ class MainActivity : AppCompatActivity() {
 //            adapter.setTodos(sortedByImp)
 //        })
 
+        // on first start there is no entry in shared preferences make it default to sort by importance
+        val sharedPreferences = getPreferences(Context.MODE_PRIVATE)
+        val sort = sharedPreferences.getString("sort-type", null)
+        if(sort == null){
+            sharedPreferences.edit().putString("sort-type", "sort-importance").apply()
+        }
 
         add_todo_fab.setOnClickListener{
             Log.d(TAG, "ADD TODO FAB CLICKED")
@@ -119,18 +124,21 @@ class MainActivity : AppCompatActivity() {
     override fun onResume() {
         search_bar.visibility = View.VISIBLE
         add_todo_fab.show()
+        sort_button.visibility = View.VISIBLE
         super.onResume()
     }
 
     override fun onStart() {
         search_bar.visibility = View.VISIBLE
         add_todo_fab.show()
+        sort_button.visibility = View.VISIBLE
         super.onStart()
     }
 
     override fun onBackPressed() {
         search_bar.visibility = View.VISIBLE
         add_todo_fab.show()
+        sort_button.visibility = View.VISIBLE
         super.onBackPressed()
     }
 

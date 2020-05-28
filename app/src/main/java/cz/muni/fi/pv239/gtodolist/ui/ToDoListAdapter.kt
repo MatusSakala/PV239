@@ -91,6 +91,10 @@ class ToDoListAdapter(val context: Context) : BaseAdapter(){
         this.notifyDataSetChanged()
     }
 
+    fun getTodos(): List<ToDo>{
+        return this.todos
+    }
+
 }
 
 

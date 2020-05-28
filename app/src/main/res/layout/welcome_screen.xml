@@ -12,18 +12,35 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-
-        <SearchView
-            android:id="@+id/search_bar"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textAlignment="center"
+            android:orientation="horizontal"
             android:layout_marginLeft="50dp"
             android:layout_marginRight="50dp"
-            android:background="@color/grey"
-            android:queryHint="Search todos..."
-            android:clickable="true"
-            android:iconifiedByDefault="false"/>
+            android:weightSum="5"
+            >
+
+            <SearchView
+                android:id="@+id/search_bar"
+                android:layout_width="0dp"
+                android:layout_weight="4"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:background="@color/grey"
+                android:queryHint="Search todos..."
+                android:clickable="true"
+                android:iconifiedByDefault="false"/>
+            <ImageButton
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:id="@+id/sort_button"
+                android:layout_height="match_parent"
+                android:text="LL"
+                android:src="@drawable/sort_icon"
+                android:background="@color/buttonBackgroundPrimaryDark"/>
+        </LinearLayout>
+
         <TextView
             android:id="@+id/empty_list_message"
             android:layout_width="match_parent"

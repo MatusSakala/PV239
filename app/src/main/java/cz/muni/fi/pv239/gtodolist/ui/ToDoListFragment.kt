@@ -1,6 +1,7 @@
 package cz.muni.fi.pv239.gtodolist.ui
 
 import android.content.Context
+import android.content.SharedPreferences
 import android.database.DataSetObserver
 import android.os.Bundle
 import android.util.Log
@@ -8,7 +9,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
+import android.widget.RadioButton
+import android.widget.RadioGroup
 import android.widget.SearchView
+import androidx.appcompat.app.AlertDialog
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -20,6 +24,7 @@ import cz.muni.fi.pv239.gtodolist.R
 import cz.muni.fi.pv239.gtodolist.api.CalendarExporter
     import cz.muni.fi.pv239.gtodolist.api.ToDoService
 import cz.muni.fi.pv239.gtodolist.api.ToDoViewModel
+import cz.muni.fi.pv239.gtodolist.model.Category
 import cz.muni.fi.pv239.gtodolist.model.ToDo
 import kotlinx.android.synthetic.main.activity_main.view.*
 import kotlinx.android.synthetic.main.fragment_todo_list.*
@@ -35,6 +40,8 @@ class ToDoListFragment : Fragment(), SwipeMenuListView.OnMenuItemClickListener, 
     private val TAG = ToDoListFragment::class.java.simpleName
     private lateinit var todoViewModel: ToDoViewModel
     private var todosLoaded = false
+    private lateinit var adapter: ToDoListAdapter
+    private lateinit var sharedPreferences: SharedPreferences
 
     fun getTodosOfImportance(todos:List<ToDo>,imp: Long): List<ToDo>{
         var result = ArrayList<ToDo>()
@@ -44,6 +51,33 @@ class ToDoListFragment : Fragment(), SwipeMenuListView.OnMenuItemClickListener, 
             }
         }
         return result.toList()
+    }
+
+    fun sortTodosByCategory(todos: List<ToDo>): List<ToDo>{
+        var categoryNames = ArrayList<String>()
+        for(t:ToDo in todos){
+            if(!categoryNames.contains(t.category.name)){
+                categoryNames.add(t.category.name)
+            }
+        }
+        var result = ArrayList<ToDo>()
+        for(c:String in categoryNames){
+            for(t:ToDo in todos){
+                if(t.category.name == c){
+                    result.add(t)
+                }
+            }
+        }
+        return result
+    }
+
+    fun sortByDateAdded(todos: List<ToDo>): List<ToDo>{
+        var result = ArrayList<ToDo>()
+        todos.sortedWith(compareBy<ToDo>{it.dateAdded.split("/")[2].toInt()}.thenBy
+                                     {it.dateAdded.split("/")[1].toInt()}.thenBy
+                                     {it.dateAdded.split("/")[0].toInt()}).forEach({result.add(it)})
+
+        return result.reversed()
     }
 
     fun sortTodosByImportance(todos: List<ToDo>, topToBottom: Boolean): List<ToDo>{
@@ -84,34 +118,74 @@ class ToDoListFragment : Fragment(), SwipeMenuListView.OnMenuItemClickListener, 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val adapter = ToDoListAdapter(context!!)
+        adapter = ToDoListAdapter(context!!)
 
         Log.d(TAG, "CREATED FRAGMENT VIEW")
-        todoViewModel = ViewModelProvider(this).get(ToDoViewModel::class.java)
+        sharedPreferences = this.activity!!.getPreferences(Context.MODE_PRIVATE)
 
-        var currentCategory = activity!!.intent.getStringExtra("category")
-        if(currentCategory == null){
-            currentCategory = "all"
+        view.rootView.sort_button.setOnClickListener{
+            val builder =  AlertDialog.Builder(this.context!!)
+            builder.setView(R.layout.pick_sort_type)
+
+            val dialog = builder.create()
+            dialog.show()
+            var radioButtonId = R.id.sort_importance
+            val sort = sharedPreferences.getString("sort-type", null)
+            when(sort){
+                "sort-importance" -> {radioButtonId = R.id.sort_importance}
+                "sort-added" -> {radioButtonId = R.id.sort_date_added}
+                "sort-category" -> {radioButtonId = R.id.sort_category}
+            }
+            dialog.findViewById<RadioButton>(radioButtonId)!!.isChecked = true
+
+            val radioGroup = dialog.findViewById<RadioGroup>(R.id.sort_group)
+            radioGroup!!.setOnCheckedChangeListener(
+                RadioGroup.OnCheckedChangeListener{ group, checkedId ->
+                    var sharedPreferencesSort = ""
+                    when(checkedId){
+                        R.id.sort_importance -> {
+                            sharedPreferencesSort = "sort-importance"
+                            adapter.setTodos(sortTodosByImportance(adapter.getTodos(), true))
+                        }
+                        R.id.sort_category -> {
+                            sharedPreferencesSort = "sort-category"
+                            adapter.setTodos(sortTodosByCategory(sortTodosByImportance(adapter.getTodos(), true)))
+                        }
+                        R.id.sort_date_added -> {
+                            sharedPreferencesSort = "sort-added"
+                            adapter.setTodos(sortByDateAdded(adapter.getTodos()))
+                        }
+                    }
+                    sharedPreferences.edit().remove("sort-type").putString("sort-type", sharedPreferencesSort).apply()
+                })
         }
 
-        Log.d(TAG, "GOT CATEGORY NAME FROM INTENT $currentCategory")
+        Log.d(TAG, "SHARED PREF VALUE = " + sharedPreferences.getString("sort-type", null))
+        todoViewModel = ViewModelProvider(this).get(ToDoViewModel::class.java)
 
         todoViewModel.allNotDone.observe(viewLifecycleOwner, Observer {todos ->
             Log.d(TAG, "FILLING ADAPTER WITH TODOS")
             // update cached copy of words in adapter
             Log.d(TAG,"ALL TODOS = " + todos.toString())
-            var validTodos = todoViewModel.getTodosOfCategory(currentCategory)
+            var validTodos = todoViewModel.getTodosOfCategory("all")
             Log.d(TAG, validTodos.toString())
-            var sortedByImp = sortTodosByImportance(validTodos, true)
-            Log.d(TAG, "SORTED TODOS = " + sortedByImp.toString())
-            adapter.setTodos(sortedByImp)
-            if(sortedByImp.size == 0){
+            var sorted: List<ToDo> = sortTodosByImportance(validTodos, true)
+            when(sharedPreferences.getString("sort-type", null)){
+                "sort-importance" -> {sorted = sortTodosByImportance(validTodos, true)}
+                "sort-category" -> {sorted = sortTodosByCategory(sortTodosByImportance(validTodos, true))}
+                "sort-added" -> {sorted = sortByDateAdded(validTodos)}
+            }
+            Log.d(TAG, "SORTED TODOS = " + sorted.toString())
+            adapter.setTodos(sorted)
+            if(sorted.size == 0){
                 view.rootView.empty_list_message.visibility = View.VISIBLE
                 view.rootView.search_bar.visibility = View.GONE
                 view.rootView.add_todo_fab.show()
+                view.rootView.sort_button.visibility = View.GONE
             }else{
                 view.rootView.empty_list_message.visibility = View.GONE
                 view.rootView.search_bar.visibility = View.VISIBLE
+                view.rootView.sort_button.visibility = View.VISIBLE
                 view.rootView.add_todo_fab.show()
             }
             todosLoaded = true
@@ -130,8 +204,8 @@ class ToDoListFragment : Fragment(), SwipeMenuListView.OnMenuItemClickListener, 
             }
 
             override fun onQueryTextChange(str: String?): Boolean {
-                if(todosLoaded){
-                    var todos = todoViewModel.getTodosOfCategory(currentCategory)
+                if(todosLoaded && str!!.isNotEmpty()){
+                    var todos = todoViewModel.getTodosOfCategory("all")
                     var validTodos = ArrayList<ToDo>()
                     for (t in todos){
                         if(t.name.contains(str as CharSequence, ignoreCase = true)){

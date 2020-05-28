@@ -56,6 +56,7 @@ class ToDoInfoFragment : Fragment() {
         Log.d(TAG, "CREATIGN VIEW MODEL")
 
         view.rootView.search_bar.visibility = View.GONE
+        view.rootView.sort_button.visibility = View.GONE
         view.rootView.add_todo_fab.hide()
 
         todoViewModel = ViewModelProvider(this).get(ToDoViewModel::class.java)
@@ -88,6 +89,7 @@ class ToDoInfoFragment : Fragment() {
             button_back.setOnClickListener {
                 view.rootView.add_todo_fab.show()
                 view.rootView.search_bar.visibility = View.VISIBLE
+                view.rootView.sort_button.visibility = View.VISIBLE
                 findNavController().navigate(R.id.action_to_todo_list)
             }
 

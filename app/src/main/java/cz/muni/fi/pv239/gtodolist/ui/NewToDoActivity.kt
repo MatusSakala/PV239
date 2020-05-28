@@ -31,7 +31,7 @@ class NewToDoActivity : AppCompatActivity() {
     // current version
     private lateinit var todoName: EditText
     private lateinit var todoDescription: EditText
-    private var activeImportance = 0
+    private var activeImportance = 1
     private lateinit var todoImportance: SeekBar
     private lateinit var categoryViewModel: CategoryViewModel
     private lateinit var addButton: Button
