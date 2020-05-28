@@ -1,5 +1,7 @@
 package cz.muni.fi.pv239.gtodolist.ui
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.database.DataSetObserver
 import android.os.Bundle
 import android.util.Log
@@ -7,6 +9,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
+import android.widget.RadioButton
+import android.widget.RadioGroup
+import android.widget.SearchView
+import androidx.appcompat.app.AlertDialog
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -18,8 +24,12 @@ import cz.muni.fi.pv239.gtodolist.R
 import cz.muni.fi.pv239.gtodolist.api.CalendarExporter
     import cz.muni.fi.pv239.gtodolist.api.ToDoService
 import cz.muni.fi.pv239.gtodolist.api.ToDoViewModel
+import cz.muni.fi.pv239.gtodolist.model.Category
 import cz.muni.fi.pv239.gtodolist.model.ToDo
+import kotlinx.android.synthetic.main.activity_main.view.*
 import kotlinx.android.synthetic.main.fragment_todo_list.*
+import kotlinx.android.synthetic.main.welcome_screen.*
+import kotlinx.android.synthetic.main.welcome_screen.view.*
 
 
 /**
@@ -29,6 +39,9 @@ class ToDoListFragment : Fragment(), SwipeMenuListView.OnMenuItemClickListener, 
 
     private val TAG = ToDoListFragment::class.java.simpleName
     private lateinit var todoViewModel: ToDoViewModel
+    private var todosLoaded = false
+    private lateinit var adapter: ToDoListAdapter
+    private lateinit var sharedPreferences: SharedPreferences
 
     fun getTodosOfImportance(todos:List<ToDo>,imp: Long): List<ToDo>{
         var result = ArrayList<ToDo>()
@@ -37,6 +50,62 @@ class ToDoListFragment : Fragment(), SwipeMenuListView.OnMenuItemClickListener, 
                 result.add(t)
             }
         }
+        return result.toList()
+    }
+
+    fun sortTodosByCategory(todos: List<ToDo>): List<ToDo>{
+        var categoryNames = ArrayList<String>()
+        for(t:ToDo in todos){
+            if(!categoryNames.contains(t.category.name)){
+                categoryNames.add(t.category.name)
+            }
+        }
+        var result = ArrayList<ToDo>()
+        for(c:String in categoryNames){
+            for(t:ToDo in todos){
+                if(t.category.name == c){
+                    result.add(t)
+                }
+            }
+        }
+        return result
+    }
+
+    fun sortByDateAdded(todos: List<ToDo>): List<ToDo>{
+        var result = ArrayList<ToDo>()
+        todos.sortedWith(compareBy<ToDo>{it.dateAdded.split("/")[2].toInt()}.thenBy
+                                     {it.dateAdded.split("/")[1].toInt()}.thenBy
+                                     {it.dateAdded.split("/")[0].toInt()}).forEach({result.add(it)})
+
+        return result.reversed()
+    }
+
+    fun sortTodosByImportance(todos: List<ToDo>, topToBottom: Boolean): List<ToDo>{
+        var result = ArrayList<ToDo>()
+        var startImportance = 10
+        var endImportance = 1
+        if(!topToBottom){
+            startImportance = 1
+            endImportance = 10
+        }
+        if(topToBottom){
+            for(i in startImportance downTo endImportance){
+                for(t in todos){
+                    if(t.importance == i.toLong()){
+                        result.add(t)
+                    }
+                }
+            }
+        }else{
+            for(i in startImportance..endImportance){
+                for(t in todos){
+                    if(t.importance == i.toLong()){
+                        result.add(t)
+                    }
+                }
+            }
+        }
+
         return result.toList()
     }
 
@@ -49,118 +118,125 @@ class ToDoListFragment : Fragment(), SwipeMenuListView.OnMenuItemClickListener, 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val adapters = ArrayList<ToDoListAdapter>()
-        val listViews = listOf(listView10, listView9, listView8, listView7,
-            listView6, listView5, listView4, listView3, listView2, listView1)
-        val importanceViews = listOf(stars_ten, stars_nine, stars_eight, stars_seven, stars_six,
-            stars_five, stars_four, stars_three, stars_two, stars_one)
-
-        for(i in 0..9){
-            adapters.add(ToDoListAdapter(context!!))
-        }
+        adapter = ToDoListAdapter(context!!)
 
         Log.d(TAG, "CREATED FRAGMENT VIEW")
-        todoViewModel = ViewModelProvider(this).get(ToDoViewModel::class.java)
+        sharedPreferences = this.activity!!.getPreferences(Context.MODE_PRIVATE)
 
-        var currentCategory = activity!!.intent.getStringExtra("category")
-        Log.d(TAG, "GOT CATEGORY NAME FROM INTENT $currentCategory")
+        view.rootView.sort_button.setOnClickListener{
+            val builder =  AlertDialog.Builder(this.context!!)
+            builder.setView(R.layout.pick_sort_type)
+
+            val dialog = builder.create()
+            dialog.show()
+            var radioButtonId = R.id.sort_importance
+            val sort = sharedPreferences.getString("sort-type", null)
+            when(sort){
+                "sort-importance" -> {radioButtonId = R.id.sort_importance}
+                "sort-added" -> {radioButtonId = R.id.sort_date_added}
+                "sort-category" -> {radioButtonId = R.id.sort_category}
+            }
+            dialog.findViewById<RadioButton>(radioButtonId)!!.isChecked = true
+
+            val radioGroup = dialog.findViewById<RadioGroup>(R.id.sort_group)
+            radioGroup!!.setOnCheckedChangeListener(
+                RadioGroup.OnCheckedChangeListener{ group, checkedId ->
+                    var sharedPreferencesSort = ""
+                    when(checkedId){
+                        R.id.sort_importance -> {
+                            sharedPreferencesSort = "sort-importance"
+                            adapter.setTodos(sortTodosByImportance(adapter.getTodos(), true))
+                        }
+                        R.id.sort_category -> {
+                            sharedPreferencesSort = "sort-category"
+                            adapter.setTodos(sortTodosByCategory(sortTodosByImportance(adapter.getTodos(), true)))
+                        }
+                        R.id.sort_date_added -> {
+                            sharedPreferencesSort = "sort-added"
+                            adapter.setTodos(sortByDateAdded(adapter.getTodos()))
+                        }
+                    }
+                    sharedPreferences.edit().remove("sort-type").putString("sort-type", sharedPreferencesSort).apply()
+                })
+        }
+
+        Log.d(TAG, "SHARED PREF VALUE = " + sharedPreferences.getString("sort-type", null))
+        todoViewModel = ViewModelProvider(this).get(ToDoViewModel::class.java)
 
         todoViewModel.allNotDone.observe(viewLifecycleOwner, Observer {todos ->
             Log.d(TAG, "FILLING ADAPTER WITH TODOS")
             // update cached copy of words in adapter
-            var validTodos = todoViewModel.getTodosOfCategory(currentCategory)
+            Log.d(TAG,"ALL TODOS = " + todos.toString())
+            var validTodos = todoViewModel.getTodosOfCategory("all")
             Log.d(TAG, validTodos.toString())
-            for(i in 0..9){
-                adapters[i].setTodos(getTodosOfImportance(validTodos, (10-i).toLong()))
+            var sorted: List<ToDo> = sortTodosByImportance(validTodos, true)
+            when(sharedPreferences.getString("sort-type", null)){
+                "sort-importance" -> {sorted = sortTodosByImportance(validTodos, true)}
+                "sort-category" -> {sorted = sortTodosByCategory(sortTodosByImportance(validTodos, true))}
+                "sort-added" -> {sorted = sortByDateAdded(validTodos)}
             }
-            //todos?.let {adapter.setTodos(validTodos)}
+            Log.d(TAG, "SORTED TODOS = " + sorted.toString())
+            adapter.setTodos(sorted)
+            if(sorted.size == 0){
+                view.rootView.empty_list_message.visibility = View.VISIBLE
+                view.rootView.search_bar.visibility = View.GONE
+                view.rootView.add_todo_fab.show()
+                view.rootView.sort_button.visibility = View.GONE
+            }else{
+                view.rootView.empty_list_message.visibility = View.GONE
+                view.rootView.search_bar.visibility = View.VISIBLE
+                view.rootView.sort_button.visibility = View.VISIBLE
+                view.rootView.add_todo_fab.show()
+            }
+            todosLoaded = true
         })
 
-        for(i in 0..9){
-            adapters[i].registerDataSetObserver(object : DataSetObserver(){
-                override fun onChanged() {
-                    listViews[i].adapter = adapters[i]
-                }
-            })
-        }
-        var text = "PERSONAL"
-        var color = resources.getColor(R.color.categoryPersonal)
-        var drawable=resources.getDrawable(R.drawable.category_personal)
+        listView.adapter = adapter
+        listView.setMenuCreator(ToDoSwipeMenu())
+        listView.setOnMenuItemClickListener(this)
+        listView.onItemClickListener = this
+        listView.setSwipeDirection(SwipeMenuListView.DIRECTION_LEFT)
 
-        when(currentCategory){
-            "WORK" -> {
-                text = "WORK"
-                color = resources.getColor(R.color.categoryWork)
-                drawable = resources.getDrawable(R.drawable.category_work)
+        view.rootView.search_bar.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+            override fun onQueryTextSubmit(str: String?): Boolean {
+                Log.d(TAG, str)
+                return false
             }
-            "NONE" -> {
-                text = "NONE"
-                color = resources.getColor(R.color.categoryNone)
-                drawable = resources.getDrawable(R.drawable.category_none)
-            }
-            "OTHER" -> {
-                text = "OTHER"
-                color = resources.getColor(R.color.categoryOther)
-                drawable = resources.getDrawable(R.drawable.category_other)
-            }
-            "TRAVEL" -> {
-                text = "TRAVEL"
-                color = resources.getColor(R.color.categoryTravel)
-                drawable = resources.getDrawable(R.drawable.category_travel)
-            }
-            "ALL" -> {
-                text = "ALL"
-                color = resources.getColor(R.color.categoryAll)
-                drawable = resources.getDrawable(R.drawable.category_all)
-            }
-        }
 
-        for(v in importanceViews){
-            v.background.setTint(color)
-        }
-
-        list_category_headline.background.setTint(color)
-        list_category_headline.setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null)
-        list_category_headline.text = text
-        list_category_headline.setTextColor(color)
-
-        for(i in 0..9){
-            listViews[i].adapter = adapters[i]
-            listViews[i].setMenuCreator(ToDoSwipeMenu())
-            listViews[i].setOnMenuItemClickListener{ pos: Int, swipeMenu: SwipeMenu, i1: Int ->
-                val todo: ToDo = listViews[i].adapter.getItem(pos) as ToDo
-                when(i1){
-                    0 ->{
-                        startActivity(CalendarExporter.createIntent(todo))
+            override fun onQueryTextChange(str: String?): Boolean {
+                if(todosLoaded && str!!.isNotEmpty()){
+                    var todos = todoViewModel.getTodosOfCategory("all")
+                    var validTodos = ArrayList<ToDo>()
+                    for (t in todos){
+                        if(t.name.contains(str as CharSequence, ignoreCase = true)){
+                            validTodos.add(t)
+                        }
                     }
-                    1 ->{
-                        todo.done = true
-                        todoViewModel.update(todo)
-                    }
+                    adapter.setTodos(validTodos)
                 }
-                false
-
+                return false
             }
-            listViews[i].setOnItemClickListener(this)
-            listViews[i].setSwipeDirection(SwipeMenuListView.DIRECTION_LEFT)
-        }
+        })
+
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
     }
 
     override fun onMenuItemClick(position: Int, menu: SwipeMenu?, index: Int): Boolean {
-//        val todo: ToDo = listView1.adapter.getItem(position) as ToDo
+        val todo: ToDo = listView.adapter.getItem(position) as ToDo
 
-//        Log.d(TAG, "PICKED "+ index.toString() +" ON TODO WITH ID " + todo.id.toString())
-//        when (index) {
-//            0 -> {
-//                startActivity(CalendarExporter.createIntent(todo))
-//            }
-//            1 -> {
-//                todo.done = true
-//                todoViewModel.update(todo)
-//                //ToDoService.markAsDone(todo.id)
-//                //listView.adapter = ToDoListAdapter(ToDoService.listAllNotDone())
-//            }
-//        }
+        Log.d(TAG, "PICKED "+ index.toString() +" ON TODO WITH ID " + todo.id.toString())
+        when (index) {
+            0 -> {
+                startActivity(CalendarExporter.createIntent(todo))
+            }
+            1 -> {
+                todo.done = true
+                todoViewModel.update(todo)
+            }
+        }
         return false
     }
 
