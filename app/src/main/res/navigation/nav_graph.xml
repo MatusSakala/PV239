@@ -3,26 +3,26 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/ToDoListFragment">
+    app:startDestination="@id/todo_list_fragment">
 
     <fragment
-        android:id="@+id/ToDoListFragment"
+        android:id="@+id/todo_list_fragment"
         android:name="cz.muni.fi.pv239.gtodolist.ui.ToDoListFragment"
         android:label="@string/todo_list_fragment_label"
         tools:layout="@layout/fragment_todo_list">
 
         <action
             android:id="@+id/action_to_todo_info"
-            app:destination="@id/ToDoInfoFragment" />
+            app:destination="@id/todo_info_fragment" />
     </fragment>
     <fragment
-        android:id="@+id/ToDoInfoFragment"
+        android:id="@+id/todo_info_fragment"
         android:name="cz.muni.fi.pv239.gtodolist.ui.ToDoInfoFragment"
         android:label="@string/todo_info_fragment_label"
         tools:layout="@layout/fragment_todo_info">
 
         <action
             android:id="@+id/action_to_todo_list"
-            app:destination="@id/ToDoListFragment" />
+            app:destination="@id/todo_list_fragment" />
     </fragment>
 </navigation>

@@ -1,6 +1,7 @@
 package cz.muni.fi.pv239.gtodolist.api
 
 import android.app.Application
+import androidx.core.content.res.ResourcesCompat
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
@@ -43,10 +44,10 @@ class CategoryViewModel(application : Application): AndroidViewModel(application
 
     fun getAllCategories(): List<Category>{
         var res = ArrayList<Category>()
-        res.add(Category(-1,"None", "#e3e305"))
-        res.add(Category(-2,"Personal", "#2323eb"))
-        res.add(Category(-3,"Work", "#b80000"))
-        res.add(Category(-4,"Travel", "#008f0a"))
+        res.add(Category(-1,"None", "#BEBECC"))
+        res.add(Category(-2,"Personal", "#CC5252"))
+        res.add(Category(-3,"Work", "#52CC52"))
+        res.add(Category(-4,"Travel", "#5252CC"))
         //res.addAll(userCategories.value!!)
         for(c in userCategories.value!!){
             res.add(c)

@@ -4,14 +4,14 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:gravity="center"
-    android:background="@color/buttonBackgroundPrimaryDark"
+    android:background="@color/buttonBackgroundPrimary"
     >
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="15dp"
         android:text="Sort by..."
-        android:textColor="@color/white"
+        android:textColor="@color/textPrimary"
         android:textSize="25dp"/>
 
     <RadioGroup
@@ -23,23 +23,23 @@
         <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/white"
+            android:textColor="@color/textPrimary"
             android:id="@+id/sort_importance"
-            android:buttonTint="@color/colorPrimaryDark"
+            android:buttonTint="@color/backgroundPrimary"
             android:text="Sort by importance" />
         <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/white"
+            android:textColor="@color/textPrimary"
             android:id="@+id/sort_category"
-            android:buttonTint="@color/colorPrimaryDark"
+            android:buttonTint="@color/backgroundPrimary"
             android:text="Sort by category" />
         <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/white"
+            android:textColor="@color/textPrimary"
             android:id="@+id/sort_date_added"
-            android:buttonTint="@color/colorPrimaryDark"
+            android:buttonTint="@color/backgroundPrimary"
             android:text="Sort by date added" />
     </RadioGroup>
 </LinearLayout>

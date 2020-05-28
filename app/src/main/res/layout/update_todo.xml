@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/backgroundPrimaryDark"
+    android:background="@color/backgroundPrimary"
     tools:context=".ui.ToDoInfoFragment">
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -19,7 +19,7 @@
             android:layout_marginLeft="10dp"
             android:textSize="20dp"
             android:text="Name"
-            android:textColor="@color/white"
+            android:textColor="@color/textPrimary"
             android:textStyle="bold"
             android:layout_marginTop="8dp"/>
 
@@ -30,7 +30,7 @@
             android:minHeight="30dp"
             android:fontFamily="sans-serif-light"
             android:inputType="textAutoComplete"
-            android:textColor="@color/white"
+            android:textColor="@color/textPrimary"
             android:background="@drawable/todo_description_bg"
             android:layout_margin="15dp"
             android:textSize="20sp" />
@@ -42,7 +42,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Category"
-            android:textColor="@color/white"
+            android:textColor="@color/textPrimary"
             android:textStyle="bold"
             android:layout_marginTop="8dp"/>
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -68,7 +68,7 @@
                 android:layout_marginBottom="3dp"
                 android:layout_marginRight="5dp"
                 android:src="@drawable/category_add"
-                android:backgroundTint="@color/colorPrimaryDark"
+                android:backgroundTint="@color/buttonBackgroundPrimary"
                 android:layout_height="match_parent"/>
         </LinearLayout>
 
@@ -79,7 +79,7 @@
             android:layout_marginLeft="10dp"
             android:text="Description"
             android:textSize="20dp"
-            android:textColor="@color/white"
+            android:textColor="@color/textPrimary"
             android:textStyle="bold"
             android:layout_marginTop="8dp"/>
 
@@ -91,7 +91,7 @@
             android:ems="10"
             android:gravity="start|top"
             android:minLines="3"
-            android:textColor="@color/white"
+            android:textColor="@color/textPrimary"
             android:layout_marginTop="5dp"
             android:layout_marginHorizontal="15dp"
             android:background="@drawable/todo_description_bg"
@@ -104,7 +104,7 @@
             android:text="Importance"
             android:layout_marginLeft="10dp"
             android:textSize="20dp"
-            android:textColor="@color/white"
+            android:textColor="@color/textPrimary"
             android:textStyle="bold"
             android:layout_marginTop="8dp"/>
 
@@ -128,17 +128,17 @@
             android:id="@+id/add_todo_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorPrimaryDark"
+            android:background="@color/buttonBackgroundPrimary"
             android:text="UPDATE"
             android:layout_margin="10dp"
-            android:textColor="@color/white" />
+            android:textColor="@color/textPrimary" />
 
     </LinearLayout>
 
     <ImageView
         android:id="@+id/button_done"
         android:src="@drawable/done"
-        android:background="@color/buttonBackgroundPrimaryDark"
+        android:background="@color/buttonBackgroundSecondary"
         android:foreground="?android:attr/selectableItemBackground"
         android:layout_width="0dp"
         android:layout_height="60dp"
@@ -149,7 +149,7 @@
     <ImageView
         android:id="@+id/button_export"
         android:src="@drawable/export_event"
-        android:background="@color/buttonBackgroundPrimaryDark"
+        android:background="@color/buttonBackgroundSecondary"
         android:foreground="?android:attr/selectableItemBackground"
         android:layout_width="0dp"
         android:layout_height="60dp"
@@ -160,7 +160,7 @@
     <ImageView
         android:id="@+id/button_back"
         android:src="@drawable/back"
-        android:background="@color/buttonBackgroundPrimaryDark"
+        android:background="@color/buttonBackgroundSecondary"
         android:foreground="?android:attr/selectableItemBackground"
         android:layout_width="0dp"
         android:layout_height="60dp"

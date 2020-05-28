@@ -21,7 +21,7 @@
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
             android:textAppearance="?attr/textAppearanceListItem"
-            android:textColor="@color/todoListItemText"
+            android:textColor="@color/textPrimary"
             android:textSize="30dp"
             android:textStyle="bold" />
 
@@ -33,7 +33,7 @@
             android:paddingStart="20dp"
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
-            android:textColor="@color/todoListItemText"
+            android:textColor="@color/textPrimary"
             android:textSize="25dp" />
 
     </LinearLayout>
@@ -41,7 +41,7 @@
     <ImageView
         android:id="@+id/button_done"
         android:src="@drawable/done"
-        android:background="@color/backgroundPrimaryDark"
+        android:background="@color/backgroundPrimary"
         android:layout_width="0dp"
         android:layout_height="60dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -51,7 +51,7 @@
     <ImageView
         android:id="@+id/button_export"
         android:src="@drawable/export_event"
-        android:background="@color/backgroundPrimaryDark"
+        android:background="@color/backgroundPrimary"
         android:layout_width="0dp"
         android:layout_height="60dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -61,7 +61,7 @@
     <ImageView
         android:id="@+id/button_back"
         android:src="@drawable/back"
-        android:background="@color/backgroundPrimaryDark"
+        android:background="@color/backgroundPrimary"
         android:layout_width="0dp"
         android:layout_height="60dp"
         app:layout_constraintBottom_toBottomOf="parent"

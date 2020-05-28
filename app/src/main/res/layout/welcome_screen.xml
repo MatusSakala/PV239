@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginTop="20dp"
-    android:background="@color/backgroundPrimaryDark"
+    android:background="@color/backgroundPrimary"
     app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
     <LinearLayout
@@ -27,7 +27,7 @@
                 android:layout_weight="4"
                 android:layout_height="wrap_content"
                 android:textAlignment="center"
-                android:background="@color/grey"
+                android:background="@color/textSecondary"
                 android:queryHint="Search todos..."
                 android:clickable="true"
                 android:iconifiedByDefault="false"/>
@@ -38,7 +38,7 @@
                 android:layout_height="match_parent"
                 android:text="LL"
                 android:src="@drawable/sort_icon"
-                android:background="@color/buttonBackgroundPrimaryDark"/>
+                android:background="@color/buttonBackgroundPrimary"/>
         </LinearLayout>
 
         <TextView
@@ -47,7 +47,7 @@
             android:layout_height="wrap_content"
             android:textSize="50dp"
             android:layout_marginTop="20dp"
-            android:textColor="@color/white"
+            android:textColor="@color/textPrimary"
             android:visibility="gone"
             android:layout_marginLeft="25dp"
             android:layout_marginRight="25dp"

@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/backgroundPrimaryDark">
+    android:background="@color/backgroundPrimary">
 
     <TextView
         android:layout_width="match_parent"
@@ -11,7 +11,7 @@
         android:textSize="25dp"
         android:layout_marginTop="5dp"
         android:layout_marginLeft="5dp"
-        android:textColor="@color/white"
+        android:textColor="@android:color/white"
         android:text="Create category"/>
 
     <TextView
@@ -20,15 +20,15 @@
         android:layout_marginTop="15dp"
         android:layout_marginLeft="15dp"
         android:text="Category name"
-        android:textColor="@color/white"/>
+        android:textColor="@color/textPrimary"/>
     <EditText
         android:id="@+id/category_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/white"
+        android:textColor="@color/textPrimary"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
-        android:backgroundTint="@color/white"/>
+        android:backgroundTint="@color/textPrimary"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -44,8 +44,8 @@
             android:layout_height="wrap_content"
             android:text="Cancel"
             android:layout_marginLeft="10dp"
-            android:textColor="@color/white"
-            android:background="@color/colorPrimaryDark"/>
+            android:textColor="@color/textPrimary"
+            android:background="@color/buttonBackgroundPrimary"/>
         <Button
             android:id="@+id/create_category"
             android:layout_width="0dp"
@@ -53,8 +53,8 @@
             android:layout_height="wrap_content"
             android:text="Create"
             android:layout_marginLeft="10dp"
-            android:textColor="@color/white"
-            android:background="@color/colorPrimaryDark"/>
+            android:textColor="@color/textPrimary"
+            android:background="@color/buttonBackgroundPrimary"/>
 
     </LinearLayout>
 
