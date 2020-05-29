@@ -40,8 +40,4 @@ data class ToDo (
         result = 31 * result + done.hashCode()
         return result
     }
-
-
-//    constructor(name: String, description: String) : this(name, description, false)
-
 }

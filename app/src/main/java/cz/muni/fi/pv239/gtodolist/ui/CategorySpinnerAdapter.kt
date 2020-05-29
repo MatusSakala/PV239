@@ -8,13 +8,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.ImageView
-import android.widget.LinearLayout
 import android.widget.TextView
 import cz.muni.fi.pv239.gtodolist.R
 import cz.muni.fi.pv239.gtodolist.model.Category
-import cz.muni.fi.pv239.gtodolist.model.ToDo
 
-class CategorySpinnerAdapter(val context: Context): BaseAdapter() {
+class CategorySpinnerAdapter(val context: Context) : BaseAdapter() {
 
     private val inflater: LayoutInflater = LayoutInflater.from(context)
     private var categories = emptyList<Category>()
@@ -25,11 +23,12 @@ class CategorySpinnerAdapter(val context: Context): BaseAdapter() {
         val category = categories[pos]
         var viewHolder: ViewHolder
 
-        if(convertView == null){
-            view = LayoutInflater.from(parent!!.context).inflate(R.layout.category_item, parent, false)
+        if (convertView == null) {
+            view =
+                LayoutInflater.from(parent!!.context).inflate(R.layout.category_item, parent, false)
             viewHolder = ViewHolder(view!!)
             view.tag = viewHolder
-        }else{
+        } else {
             view = convertView
             viewHolder = view.tag as ViewHolder
         }
@@ -41,9 +40,10 @@ class CategorySpinnerAdapter(val context: Context): BaseAdapter() {
         return view
     }
 
-    internal class ViewHolder(view: View){
+    internal class ViewHolder(view: View) {
         var categoryName = view.findViewById(R.id.spinner_category_name) as TextView
         var categoryIcon = view.findViewById(R.id.spinner_category_icon) as ImageView
+
         init {
             view.tag = this
         }
@@ -61,7 +61,7 @@ class CategorySpinnerAdapter(val context: Context): BaseAdapter() {
         return categories.size
     }
 
-    internal fun setCategories(categories: List<Category>){
+    internal fun setCategories(categories: List<Category>) {
         this.categories = categories
         Log.d(TAG, "DATA SET CHANGED IN SPINNER ADAPTER")
         this.notifyDataSetChanged()

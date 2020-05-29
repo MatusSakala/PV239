@@ -2,7 +2,6 @@ package cz.muni.fi.pv239.gtodolist.ui
 
 import android.graphics.Color
 import android.os.Bundle
-import android.text.Editable
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -18,15 +17,12 @@ import androidx.navigation.fragment.findNavController
 import cz.muni.fi.pv239.gtodolist.R
 import cz.muni.fi.pv239.gtodolist.api.CalendarExporter
 import cz.muni.fi.pv239.gtodolist.api.CategoryViewModel
-import cz.muni.fi.pv239.gtodolist.api.ToDoService
 import cz.muni.fi.pv239.gtodolist.api.ToDoViewModel
 import cz.muni.fi.pv239.gtodolist.model.Category
 import cz.muni.fi.pv239.gtodolist.model.ToDo
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_main.view.*
 import kotlinx.android.synthetic.main.create_todo.*
 import kotlinx.android.synthetic.main.fragment_todo_info.*
-import kotlinx.android.synthetic.main.welcome_screen.*
 import kotlinx.android.synthetic.main.welcome_screen.view.*
 import java.util.*
 
@@ -51,19 +47,24 @@ class ToDoInfoFragment : Fragment() {
         return inflater.inflate(R.layout.update_todo, container, false)
     }
 
+    override fun onResume() {
+        super.onResume()
+
+        if(view != null){
+            view!!.rootView.search_bar.visibility = View.GONE
+            view!!.rootView.sort_button.visibility = View.GONE
+            view!!.rootView.add_todo_fab.hide()
+        }
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         Log.d(TAG, "CREATIGN VIEW MODEL")
-
-        view.rootView.search_bar.visibility = View.GONE
-        view.rootView.sort_button.visibility = View.GONE
-        view.rootView.add_todo_fab.hide()
 
         todoViewModel = ViewModelProvider(this).get(ToDoViewModel::class.java)
 
         todoViewModel.allTodos.observe(viewLifecycleOwner, Observer {todos ->
             Log.d(TAG, "GOT ALL TODOS")
-            // update cached copy of words in adapter
             Log.d(TAG, todos.toString())
             val id = arguments?.getLong("id")!!
             todo = todoViewModel.getTodoWithId(id)
@@ -131,7 +132,7 @@ class ToDoInfoFragment : Fragment() {
                     // add category
                     var categoryName = dialog.findViewById<EditText>(R.id.category_name)!!.text.toString()
                     var rnd = Random()
-                    var color = Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256)).toString(16).replace('-', '#')
+                    var color = Color.HSVToColor(floatArrayOf(rnd.nextInt(361).toFloat(), 0.6f, 0.8f)).toString(16).replace('-', '#')
                     categoryViewModel.insert(Category(categoryName, color))
                     Toast.makeText(
                         context,

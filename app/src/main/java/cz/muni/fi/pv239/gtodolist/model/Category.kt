@@ -13,5 +13,4 @@ data class Category(
     constructor(name:String, color: String) : this(0, name, color, "")
     constructor(id:Long, name:String, color:String): this(id, name, color, "")
 
-    //NONE, PERSONAL, WORK, TRAVEL, OTHER
 }

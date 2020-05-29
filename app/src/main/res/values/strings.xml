@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">GToDoList</string>
-    <string name="action_settings">Settings</string>
     <!-- Strings used for fragments for navigation -->
     <string name="todo_list_fragment_label">TODO List Fragment</string>
     <string name="todo_info_fragment_label">TODO Info Fragment</string>
@@ -10,8 +9,5 @@
 
 
     <!--info fragment buttons-->
-    <string name="back">Back</string>
-    <string name="done">Done</string>
-    <string name="export">Export</string>
 
 </resources>

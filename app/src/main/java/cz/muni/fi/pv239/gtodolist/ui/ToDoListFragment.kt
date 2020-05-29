@@ -2,7 +2,6 @@ package cz.muni.fi.pv239.gtodolist.ui
 
 import android.content.Context
 import android.content.SharedPreferences
-import android.database.DataSetObserver
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -22,13 +21,10 @@ import com.baoyz.swipemenulistview.SwipeMenu
 import com.baoyz.swipemenulistview.SwipeMenuListView
 import cz.muni.fi.pv239.gtodolist.R
 import cz.muni.fi.pv239.gtodolist.api.CalendarExporter
-    import cz.muni.fi.pv239.gtodolist.api.ToDoService
 import cz.muni.fi.pv239.gtodolist.api.ToDoViewModel
-import cz.muni.fi.pv239.gtodolist.model.Category
 import cz.muni.fi.pv239.gtodolist.model.ToDo
 import kotlinx.android.synthetic.main.activity_main.view.*
 import kotlinx.android.synthetic.main.fragment_todo_list.*
-import kotlinx.android.synthetic.main.welcome_screen.*
 import kotlinx.android.synthetic.main.welcome_screen.view.*
 
 
@@ -42,16 +38,6 @@ class ToDoListFragment : Fragment(), SwipeMenuListView.OnMenuItemClickListener, 
     private var todosLoaded = false
     private lateinit var adapter: ToDoListAdapter
     private lateinit var sharedPreferences: SharedPreferences
-
-    fun getTodosOfImportance(todos:List<ToDo>,imp: Long): List<ToDo>{
-        var result = ArrayList<ToDo>()
-        for(t in todos){
-            if(t.importance == imp){
-                result.add(t)
-            }
-        }
-        return result.toList()
-    }
 
     fun sortTodosByCategory(todos: List<ToDo>): List<ToDo>{
         var categoryNames = ArrayList<String>()
@@ -204,24 +190,36 @@ class ToDoListFragment : Fragment(), SwipeMenuListView.OnMenuItemClickListener, 
             }
 
             override fun onQueryTextChange(str: String?): Boolean {
-                if(todosLoaded && str!!.isNotEmpty()){
+                if(todosLoaded){
                     var todos = todoViewModel.getTodosOfCategory("all")
-                    var validTodos = ArrayList<ToDo>()
-                    for (t in todos){
-                        if(t.name.contains(str as CharSequence, ignoreCase = true)){
-                            validTodos.add(t)
+                    var validTodos = todos
+                    if(str!!.isEmpty()){
+                        validTodos = todos
+                    }else{
+                        var tmp = ArrayList<ToDo>()
+                        for (t in todos) {
+                            if (t.name.contains(str as CharSequence, ignoreCase = true)) {
+                                tmp.add(t)
+                            }
+                        }
+                        validTodos = tmp.toList()
+                    }
+                    when(sharedPreferences.getString("sort-type", null)){
+                        "sort-importance" -> {
+                            adapter.setTodos(sortTodosByImportance(validTodos, true))
+                        }
+                        "sort-category" -> {
+                            adapter.setTodos(sortTodosByCategory(sortTodosByImportance(validTodos, true)))
+                        }
+                        "sort-added" -> {
+                            adapter.setTodos(sortByDateAdded(validTodos))
                         }
                     }
-                    adapter.setTodos(validTodos)
                 }
                 return false
             }
         })
 
-    }
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
     }
 
     override fun onMenuItemClick(position: Int, menu: SwipeMenu?, index: Int): Boolean {
@@ -243,7 +241,6 @@ class ToDoListFragment : Fragment(), SwipeMenuListView.OnMenuItemClickListener, 
     override fun onItemClick(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
         val bundle = bundleOf("id" to id)
         Log.d(TAG, "CLICKED ON TODO WITH ID $id")
-        Log.d(TAG, bundle.toString())
         findNavController().navigate(R.id.action_to_todo_info, bundle)
 
     }

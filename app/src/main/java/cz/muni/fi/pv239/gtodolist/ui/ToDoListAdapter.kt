@@ -2,29 +2,20 @@ package cz.muni.fi.pv239.gtodolist.ui
 
 
 import android.content.Context
+import android.content.res.Configuration
 import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.ImageView
-import android.widget.ListAdapter
 import android.widget.TextView
-import androidx.core.content.ContextCompat
-import androidx.recyclerview.widget.RecyclerView
 import cz.muni.fi.pv239.gtodolist.R
-import cz.muni.fi.pv239.gtodolist.model.Category
 import cz.muni.fi.pv239.gtodolist.model.ToDo
-import kotlinx.android.synthetic.main.todo_list_item.view.*
-import org.w3c.dom.Text
-import kotlin.coroutines.coroutineContext
 
 
 class ToDoListAdapter(val context: Context) : BaseAdapter(){
-
-    private val inflater: LayoutInflater = LayoutInflater.from(context)
     private var todos = emptyList<ToDo>()
     private val TAG = ToDoListAdapter::class.java.simpleName
 
@@ -60,13 +51,17 @@ class ToDoListAdapter(val context: Context) : BaseAdapter(){
         }
 
         viewHolder.name.text = todo.name
-        // this is for textView with background
-        //viewHolder.categoryDot.background.setTint(context.resources.getColor(R.color.categoryTravel))
-        // this is for imageView
-        //viewHolder.categoryDot.setColorFilter(color)
         viewHolder.dateAdded.text = todo.dateAdded
         viewHolder.categoryName.text = todo.category.name
         viewHolder.importance.setImageDrawable(context.resources.getDrawable(importanceImages[todo.importance.toInt() - 1]))
+        var orientation = context.resources.getConfiguration().orientation
+        if(orientation == Configuration.ORIENTATION_PORTRAIT){
+            viewHolder.importance.scaleX = 2.5f
+            viewHolder.importance.scaleY = 2.5f
+        }else{
+            viewHolder.importance.scaleX = 1f
+            viewHolder.importance.scaleY = 1f
+        }
         viewHolder.importance.setColorFilter(Color.parseColor(todo.category.color))
         viewHolder.categoryDot.setColorFilter(Color.parseColor(todo.category.color))
 
@@ -87,7 +82,7 @@ class ToDoListAdapter(val context: Context) : BaseAdapter(){
 
     internal fun setTodos(todos: List<ToDo>){
         this.todos = todos
-                    Log.d(TAG, "DATA SET CHANGED IN ADAPTER")
+        Log.d(TAG, "DATA SET CHANGED IN ADAPTER")
         this.notifyDataSetChanged()
     }
 

@@ -72,8 +72,6 @@
             android:id="@+id/todo_importance"
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:scaleX="2.5"
-            android:scaleY="2.5"
             android:layout_height="match_parent"
             android:layout_gravity="center"
             android:src="@drawable/stars_eight"

@@ -1,16 +1,15 @@
 package cz.muni.fi.pv239.gtodolist.ui
 
 import android.app.Activity
-import android.content.Context
-import android.content.DialogInterface
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.text.TextUtils
-import android.util.AttributeSet
 import android.util.Log
-import android.view.View
-import android.widget.*
+import android.widget.Button
+import android.widget.EditText
+import android.widget.SeekBar
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
@@ -18,9 +17,7 @@ import androidx.lifecycle.ViewModelProvider
 import cz.muni.fi.pv239.gtodolist.R
 import cz.muni.fi.pv239.gtodolist.api.CategoryViewModel
 import cz.muni.fi.pv239.gtodolist.model.Category
-import kotlinx.android.synthetic.main.create_category.*
 import kotlinx.android.synthetic.main.create_todo.*
-import java.sql.Time
 import java.util.*
 
 

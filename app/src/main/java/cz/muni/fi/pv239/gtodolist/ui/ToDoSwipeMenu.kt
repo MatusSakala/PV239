@@ -1,7 +1,6 @@
 package cz.muni.fi.pv239.gtodolist.ui
 
 import android.content.Context
-import android.graphics.drawable.ColorDrawable
 import android.util.TypedValue
 import androidx.core.content.ContextCompat
 import com.baoyz.swipemenulistview.SwipeMenu
@@ -12,17 +11,19 @@ import cz.muni.fi.pv239.gtodolist.R
 class ToDoSwipeMenu: SwipeMenuCreator{
 
     override fun create(menu: SwipeMenu?) {
-        val calendarItem = SwipeMenuItem(menu?.context!!)
-        calendarItem.background = ContextCompat.getDrawable(menu.context, R.drawable.ripple_bg)
-        calendarItem.width = calculateWidth(menu.context)
-        calendarItem.setIcon(R.drawable.export_event)
-        menu.addMenuItem(calendarItem)
+        if(menu?.context != null){
+            val calendarItem = SwipeMenuItem(menu.context)
+            calendarItem.background = ContextCompat.getDrawable(menu.context, R.drawable.ripple_bg)
+            calendarItem.width = calculateWidth(menu.context)
+            calendarItem.setIcon(R.drawable.export_event)
+            menu.addMenuItem(calendarItem)
 
-        val doneItem = SwipeMenuItem(menu.context)
-        doneItem.background = ContextCompat.getDrawable(menu.context, R.drawable.ripple_bg)
-        doneItem.width = calculateWidth(menu.context)
-        doneItem.setIcon(R.drawable.done)
-        menu.addMenuItem(doneItem)
+            val doneItem = SwipeMenuItem(menu.context)
+            doneItem.background = ContextCompat.getDrawable(menu.context, R.drawable.ripple_bg)
+            doneItem.width = calculateWidth(menu.context)
+            doneItem.setIcon(R.drawable.done)
+            menu.addMenuItem(doneItem)
+        }
     }
 
     private fun calculateWidth(context: Context): Int {
