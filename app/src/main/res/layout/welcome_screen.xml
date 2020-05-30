@@ -28,7 +28,7 @@
                 android:layout_height="wrap_content"
                 android:textAlignment="center"
                 android:background="@color/textSecondary"
-                android:queryHint="Search todos..."
+                android:queryHint="@string/search_hint"
                 android:clickable="true"
                 android:iconifiedByDefault="false"/>
             <ImageButton
@@ -51,7 +51,7 @@
             android:visibility="gone"
             android:layout_marginLeft="25dp"
             android:layout_marginRight="25dp"
-            android:text="Start by adding todos."/>
+            android:text="@string/no_todo_hint"/>
         <include layout="@layout/content_main"/>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

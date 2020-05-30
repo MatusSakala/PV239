@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">GToDoList</string>
+
+    <!--  hints  -->
+    <string name="search_hint">Vyhľadať TODOčka…</string>
+    <string name="no_todo_hint">Začni vytvorením TODOčka</string>
+
+    <!--  labels  -->
+    <string name="name">Meno</string>
+    <string name="category">Kategória</string>
+    <string name="description">Popis</string>
+    <string name="importance">Dôležitosť</string>
+
+    <!--  buttons  -->
+    <string name="update">Upraviť</string>
+    <string name="add">Pridať</string>
+    <string name="cancel">Zrušiť</string>
+    <string name="create">Vytvoriť</string>
+
+    <!--  create category  -->
+    <string name="create_category">Vytvoriť kategóriu</string>
+    <string name="category_name">Názov kategórie</string>
+
+    <!--  sorting  -->
+    <string name="sort">Usporiadať podľa…</string>
+    <string name="sort_importance">Usporiadať podľa dôležitosti</string>
+    <string name="sort_category">Usporiadať podľa kategórie</string>
+    <string name="sort_date">Usporiadať podľa dátumu pridania</string>
+</resources>
