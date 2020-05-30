@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/todo_list_fragment"
         android:name="cz.muni.fi.pv239.gtodolist.ui.ToDoListFragment"
-        android:label="@string/todo_list_fragment_label"
+        android:label="todo_list_fragment_label"
         tools:layout="@layout/fragment_todo_list">
 
         <action
@@ -18,7 +18,7 @@
     <fragment
         android:id="@+id/todo_info_fragment"
         android:name="cz.muni.fi.pv239.gtodolist.ui.ToDoInfoFragment"
-        android:label="@string/todo_info_fragment_label"
+        android:label="todo_info_fragment_label"
         tools:layout="@layout/fragment_todo_info">
 
         <action

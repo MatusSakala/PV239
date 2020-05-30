@@ -25,7 +25,6 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/textSecondary"
                 android:paddingStart="20dp"
-                android:text="24/04/2020"
                 />
             <LinearLayout
                 android:layout_width="match_parent"
@@ -45,7 +44,6 @@
                     android:textColor="@color/textPrimary"
                     android:singleLine="true"
                     android:textStyle="bold"
-                    android:text="THIS IS Rfas"
                     />
                 <ImageView
                     android:id="@+id/todo_category_dot"
@@ -61,7 +59,6 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="20"
                     android:textColor="@color/textPrimary"
-                    android:text="Work"
                     android:textSize="10dp"
                     android:layout_marginEnd="5dp"
                     android:layout_gravity="center"/>

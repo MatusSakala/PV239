@@ -15,7 +15,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:textSize="20dp"
-            android:text="Name"
+            android:text="@string/name"
             android:textColor="@color/textPrimary"
             android:textStyle="bold"
             android:layout_marginTop="8dp"/>
@@ -38,7 +38,7 @@
             android:textSize="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Category"
+            android:text="@string/category"
             android:textColor="@color/textPrimary"
             android:textStyle="bold"
             android:layout_marginTop="8dp"/>
@@ -74,7 +74,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:text="Description"
+            android:text="@string/description"
             android:textSize="20dp"
             android:textColor="@color/textPrimary"
             android:textStyle="bold"
@@ -98,7 +98,7 @@
             android:id="@+id/todo_importance"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Importance"
+            android:text="@string/importance"
             android:layout_marginLeft="10dp"
             android:textSize="20dp"
             android:textColor="@color/textPrimary"
@@ -126,7 +126,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/buttonBackgroundPrimary"
-            android:text="ADD"
+            android:text="@string/add"
             android:layout_margin="10dp"
             android:textColor="@color/textPrimary" />
 

@@ -1,13 +1,29 @@
 <resources>
     <string name="app_name">GToDoList</string>
-    <!-- Strings used for fragments for navigation -->
-    <string name="todo_list_fragment_label">TODO List Fragment</string>
-    <string name="todo_info_fragment_label">TODO Info Fragment</string>
 
+    <!--  hints  -->
+    <string name="search_hint">Search TODOs…</string>
+    <string name="no_todo_hint">Start by adding TODOs</string>
 
+    <!--  labels  -->
+    <string name="name">Name</string>
+    <string name="category">Category</string>
+    <string name="description">Description</string>
+    <string name="importance">Importance</string>
 
+    <!--  buttons  -->
+    <string name="update">Update</string>
+    <string name="add">Add</string>
+    <string name="cancel">Cancel</string>
+    <string name="create">Create</string>
 
+    <!--  create category  -->
+    <string name="create_category">Create category</string>
+    <string name="category_name">Category name</string>
 
-    <!--info fragment buttons-->
-
+    <!--  sorting  -->
+    <string name="sort">Sort by…</string>
+    <string name="sort_importance">Sort by importance</string>
+    <string name="sort_category">Sort by category</string>
+    <string name="sort_date">Sort by date added</string>
 </resources>

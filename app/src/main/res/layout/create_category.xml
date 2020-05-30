@@ -12,14 +12,14 @@
         android:layout_marginTop="5dp"
         android:layout_marginLeft="5dp"
         android:textColor="@android:color/white"
-        android:text="Create category"/>
+        android:text="@string/create_category"/>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
         android:layout_marginLeft="15dp"
-        android:text="Category name"
+        android:text="@string/category_name"
         android:textColor="@color/textPrimary"/>
     <EditText
         android:id="@+id/category_name"
@@ -42,7 +42,7 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:text="Cancel"
+            android:text="@string/cancel"
             android:layout_marginLeft="10dp"
             android:textColor="@color/textPrimary"
             android:background="@color/buttonBackgroundPrimary"/>
@@ -51,7 +51,7 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:text="Create"
+            android:text="@string/create"
             android:layout_marginLeft="10dp"
             android:textColor="@color/textPrimary"
             android:background="@color/buttonBackgroundPrimary"/>
