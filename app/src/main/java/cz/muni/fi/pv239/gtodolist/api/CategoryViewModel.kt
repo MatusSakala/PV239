@@ -42,7 +42,7 @@ class CategoryViewModel(application : Application): AndroidViewModel(application
         return Category("", "#000000")
     }
 
-    fun getAllCategories(): List<Category>{
+    fun getAllCategories(): List<Category>{     // Tohle je sice fungujici, ale odbyta funkce. Neresite lint hlasku, kategorie neprelozene, vsechno hardcoded, defaultni kategorie nemam moznost odstranit a vzdycky me tam budou otravovat, i kdyz je nepouzivam, list se generuje vzdy novy
         var res = ArrayList<Category>()
         res.add(Category(-1,"None", "#BEBECC"))
         res.add(Category(-2,"Personal", "#CC5252"))
