@@ -53,7 +53,7 @@ android {
 }
 
 apply plugin: "kotlin-kapt"
-apply plugin: 'com.android.application'
+apply plugin: 'com.android.application'     // Proc to tady je podruhe?
 apply plugin: 'kotlin-android'
 
 dependencies {

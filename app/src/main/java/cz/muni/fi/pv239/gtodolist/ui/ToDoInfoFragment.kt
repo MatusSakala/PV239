@@ -50,7 +50,7 @@ class ToDoInfoFragment : Fragment() {
     override fun onResume() {
         super.onResume()
 
-        if(view != null){
+        if(view != null){       // Nemusite jit pres view, staci findviewbyid nebo synthetic view binding. V onResume() jeste view existuje.
             view!!.rootView.search_bar.visibility = View.GONE
             view!!.rootView.sort_button.visibility = View.GONE
             view!!.rootView.add_todo_fab.hide()
@@ -118,6 +118,8 @@ class ToDoInfoFragment : Fragment() {
                 Log.d(TAG, "CLICKED CANCEL")
                 dialog.dismiss()
             }
+            // Ctete ty Lint hlasky, davaji vam dobre rady zadarmo
+            // Jak jsem zminoval na konzultaci, nikdy nepouzivat !!. Pokud bude context null, crash, pokud bude view null, taky crash. A da se to jednoduse nasimulovat.
             dialog.findViewById<Button>(R.id.create_category)!!.setOnClickListener{
                 Log.d(TAG, "CLICKED CREATE")
                 var categoryName = dialog.findViewById<EditText>(R.id.category_name)!!.text
@@ -125,7 +127,7 @@ class ToDoInfoFragment : Fragment() {
                     // make toast that category was not added
                     Toast.makeText(
                         context,
-                        "Fill category name",
+                        "Fill category name",       // Neprelozeny text
                         Toast.LENGTH_SHORT
                     ).show()
                 }else{

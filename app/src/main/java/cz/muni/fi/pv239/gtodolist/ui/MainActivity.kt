@@ -17,7 +17,10 @@ import cz.muni.fi.pv239.gtodolist.model.ToDo
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.welcome_screen.*
 import java.util.*
+/*
+1. Otoceni displeje pri vytvareni TO DO nezachova vybranou kategorii
 
+ */
 class MainActivity : AppCompatActivity() {
 
     private val TAG = MainActivity::class.java.simpleName
